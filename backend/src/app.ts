@@ -1,5 +1,6 @@
 import express from 'express'
 import indexRouter from '@routes/index'
+import '@database/connection'
 
 const app = express()
 

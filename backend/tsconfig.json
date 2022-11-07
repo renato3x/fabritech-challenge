@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
       "@controllers/*": [
@@ -24,6 +25,9 @@
       ],
       "@routes/*": [
         "./src/routes/*"
+      ],
+      "@database/*": [
+        "./src/database/*"
       ]
     },
     "typeRoots": [
