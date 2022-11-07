@@ -5,7 +5,7 @@ import { Address } from './Address';
 export class Client {
 
   @PrimaryGeneratedColumn('increment')
-  id: number
+  id?: number
 
   @Column()
   firstName: string

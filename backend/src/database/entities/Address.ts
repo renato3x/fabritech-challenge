@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class Address {
   
   @PrimaryGeneratedColumn('increment')
-  id: number
+  id?: number
 
   @Column()
   city: string
