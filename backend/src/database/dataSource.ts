@@ -1,5 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
+import { Address } from './entities/Address'
+import { Client } from './entities/Client'
 
 export const dataSource: DataSource = new DataSource({
   type: "mssql",
@@ -10,7 +12,7 @@ export const dataSource: DataSource = new DataSource({
   database: "fabritech_challenge",
   synchronize: true,
   logging: true,
-  entities: [],
+  entities: [Address, Client],
   extra: {
     trustServerCertificate: true
   }
