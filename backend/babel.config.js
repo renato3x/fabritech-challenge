@@ -12,7 +12,8 @@ module.exports = {
       alias: {
         '@controllers': './src/controllers',
         '@routes': './src/routes',
-        '@database': './src/database'
+        '@database': './src/database',
+        '@services': './src/services'
       }
     }]
   ]
