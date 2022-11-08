@@ -11,7 +11,7 @@ export const dataSource: DataSource = new DataSource({
   password: "IXT%)_1069",
   database: "fabritech_challenge",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [Address, Client],
   extra: {
     trustServerCertificate: true
