@@ -1,5 +1,6 @@
 import { dataSource } from "@database/dataSource";
 import { Address } from "@database/entities/Address";
+import { ServerError } from "@errors/ServerError";
 import { Repository } from "typeorm";
 
 export default class AddressService {
@@ -7,31 +8,22 @@ export default class AddressService {
 
   static async create(address: Address): Promise<Address> {
     try {
-      const newAddress = this.addressRepository.save(address)
+      delete address.id
+      const newAddress = await this.addressRepository.save(address)
       return newAddress
     } catch (error) {
-      throw new Error('Error at insert a new Address')
+      throw new ServerError(500, 'Error at create a new address')
     }
   }
 
   static async update(address: Address): Promise<void> {
     try {
-      const addressExists = await this.addressRepository.findOne({
-        where: {
-          id: address.id
-        }
-      })
-
-      if (!addressExists) {
-        throw new Error('Address not found')
-      }
-
       const id = address.id as number
       delete address.id
       
       await this.addressRepository.update(id, address)
     } catch (error) {
-      throw new Error('Error at update a Address')
+      throw new ServerError(500, 'Error at update address')
     }
   }
 }
