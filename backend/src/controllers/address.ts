@@ -16,4 +16,18 @@ export class AddressController {
 
     return response.status(201).json(savedAddress)
   }
+
+  static async update(request: Request, response: Response) {
+    const address: Address = request.body
+
+    if (!address) {
+      return response.status(400).json({
+        message: 'Insufficient data to update a Address'
+      })
+    }
+
+    await AddressService.update(address)
+
+    return response.status(204).json()
+  }
 }

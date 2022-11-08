@@ -26,7 +26,10 @@ export class AddressService {
         throw new Error('Address not found')
       }
 
-      await this.addressRepository.update(address.id as number, address)
+      const id = address.id as number
+      delete address.id
+      
+      await this.addressRepository.update(id, address)
     } catch (error) {
       throw new Error('Error at update a Address')
     }
