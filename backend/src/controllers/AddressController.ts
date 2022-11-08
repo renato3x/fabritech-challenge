@@ -18,9 +18,9 @@ export default class AddressController {
   }
 
   static async update(request: Request, response: Response) {
-    const address: Address = request.body
+    const address: Partial<Address> = request.body
 
-    if (ValidationService.isEmpty(address)) {
+    if (ValidationService.isEmpty(address) || !address.id) {
       throw new ServerError(400, 'Insufficient data to update a Address')
     }
 

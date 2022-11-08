@@ -16,7 +16,7 @@ export default class AddressService {
     }
   }
 
-  static async update(address: Address): Promise<void> {
+  static async update(address: Partial<Address>): Promise<void> {
     try {
       const id = address.id as number
       delete address.id
