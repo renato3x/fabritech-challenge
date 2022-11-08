@@ -16,6 +16,21 @@ export default class ClientService {
     }
   }
 
+  static async findById(id: number): Promise<Client | null> {
+    try {
+      return this.clientRepository.findOne({
+        where: {
+          id
+        },
+        relations: {
+          address: true
+        }
+      })
+    } catch (error) {
+      throw new ServerError(500, 'Error at recover client')
+    }
+  }
+
   static async getAll(): Promise<Client[]> {
     try {
       return await this.clientRepository.find({
