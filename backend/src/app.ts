@@ -1,6 +1,6 @@
 import express from 'express'
-import indexRouter from '@routes/index'
-import addressRouter from '@routes/address'
+import indexRouter from '@routes/indexRoutes'
+import addressRouter from '@routes/addressRoutes'
 
 import '@database/connection'
 

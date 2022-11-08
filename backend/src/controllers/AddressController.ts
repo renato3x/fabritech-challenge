@@ -1,8 +1,8 @@
 import { Address } from "@database/entities/Address";
-import { AddressService } from "@services/address";
+import AddressService from "@services/AddressService";
 import { Request, Response } from "express";
 
-export class AddressController {
+export default class AddressController {
   static async create(request: Request, response: Response) {
     const address: Address = request.body
 

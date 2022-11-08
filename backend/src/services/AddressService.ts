@@ -2,7 +2,7 @@ import { dataSource } from "@database/dataSource";
 import { Address } from "@database/entities/Address";
 import { Repository } from "typeorm";
 
-export class AddressService {
+export default class AddressService {
   private static readonly addressRepository: Repository<Address> = dataSource.getRepository(Address)
 
   static async create(address: Address): Promise<Address> {
