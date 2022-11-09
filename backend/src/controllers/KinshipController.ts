@@ -30,4 +30,16 @@ export default class KinshipController {
 
     return response.status(204).json()
   }
+
+  static async delete(request: Request, response: Response) {
+    const id = request.params.id
+
+    if (isNaN(Number(id))) {
+      throw new ServerError(400, '\'id\' is invalid')
+    }
+
+    await KinshipService.deleteById(parseInt(id))
+
+    return response.status(204).json()
+  }
 }

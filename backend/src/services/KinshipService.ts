@@ -22,7 +22,15 @@ export default class KinshipService {
       
       await this.kinshipRepository.update(id, kinship)
     } catch (error) {
-      throw new ServerError(500, 'Error at update kinships')
+      throw new ServerError(500, 'Error at update kinship')
+    }
+  }
+
+  static async deleteById(id: number): Promise<void> {
+    try {
+      await this.kinshipRepository.delete(id)
+    } catch (error) {
+      throw new ServerError(500, 'Error at delete kinship')
     }
   }
 }

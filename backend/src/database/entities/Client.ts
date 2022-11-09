@@ -38,7 +38,7 @@ export class Client {
   address: Address
 
   @OneToMany(() => Kinship, kinship => kinship.client, {
-    onDelete: 'CASCADE'
+    onUpdate: 'CASCADE'
   })
   @JoinColumn()
   kinships: Kinship[]
