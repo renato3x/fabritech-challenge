@@ -26,4 +26,12 @@ export default class AddressService {
       throw new ServerError(500, 'Error at update address')
     }
   }
+
+  static async deleteById(id: number): Promise<void> {
+    try {
+      await this.addressRepository.delete(id)
+    } catch (error) {
+      throw new ServerError(500, 'Error at delete Address')
+    }
+  }
 }

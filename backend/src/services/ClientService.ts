@@ -2,6 +2,7 @@ import { dataSource } from "@database/dataSource";
 import { Client } from "@database/entities/Client";
 import { ServerError } from "@errors/ServerError";
 import { Repository } from "typeorm";
+import AddressService from "./AddressService";
 
 export default class ClientService {
   private static readonly clientRepository: Repository<Client> = dataSource.getRepository(Client)
@@ -45,7 +46,15 @@ export default class ClientService {
 
   static async deleteById(id: number): Promise<void> {
     try {
-      await this.clientRepository.delete(id)
+      const client = await this.findById(id)
+      
+      if (!client) {
+        throw new ServerError(404, 'Client to delete not found')
+      }
+
+      const addressId = client.address.id as number
+
+      await AddressService.deleteById(addressId)
     } catch (error) {
       throw new ServerError(500, 'Error at delete client')
     }

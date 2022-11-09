@@ -29,7 +29,9 @@ export class Client {
   email: string
 
   @OneToOne(() => Address, {
-    nullable: false
+    nullable: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
   })
   @JoinColumn()
   address: Address
