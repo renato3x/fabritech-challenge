@@ -24,7 +24,8 @@ export default class ClientService {
           id
         },
         relations: {
-          address: true
+          address: true,
+          kinships: true
         }
       })
     } catch (error) {
@@ -36,7 +37,8 @@ export default class ClientService {
     try {
       return await this.clientRepository.find({
         relations: {
-          address: true
+          address: true,
+          kinships: true
         }
       })
     } catch (error) {

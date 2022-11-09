@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Address } from './Address';
+import { Kinship } from './Kinship';
 
 @Entity()
 export class Client {
@@ -35,4 +36,10 @@ export class Client {
   })
   @JoinColumn()
   address: Address
+
+  @OneToMany(() => Kinship, kinship => kinship.client, {
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn()
+  kinships: Kinship[]
 }
