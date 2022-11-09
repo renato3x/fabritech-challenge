@@ -8,10 +8,7 @@ export class Address {
 
   @Column()
   city: string
-
-  @Column()
-  publicPlace: string
-
+  
   @Column()
   name: string
 
