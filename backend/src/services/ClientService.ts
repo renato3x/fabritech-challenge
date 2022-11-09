@@ -42,4 +42,12 @@ export default class ClientService {
       throw new ServerError(500, 'Error at recover clients')
     }
   }
+
+  static async deleteById(id: number): Promise<void> {
+    try {
+      await this.clientRepository.delete(id)
+    } catch (error) {
+      throw new ServerError(500, 'Error at delete client')
+    }
+  }
 }

@@ -38,4 +38,16 @@ export default class ClientController {
 
     return response.status(201).json(savedClient)
   }
+
+  static async delete(request: Request, response: Response) {
+    const { id } = request.params
+
+    if (isNaN(Number(id))) {
+      throw new ServerError(400, '\'id\' is invalid')
+    }
+
+    await ClientService.deleteById(parseInt(id))
+
+    return response.status(204).json()
+  }
 }
