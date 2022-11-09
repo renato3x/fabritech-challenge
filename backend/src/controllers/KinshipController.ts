@@ -17,4 +17,17 @@ export default class KinshipController {
 
     return response.status(201).json(savedKinships)
   }
+
+  static async update(request: Request, response: Response) {
+    const kinship: Partial<Kinship> = request.body
+
+    if (ValidationService.isEmpty(kinship) || !kinship.id) {
+      throw new ServerError(400, 'Insufficient data to update kinships')
+
+    }
+
+    await KinshipService.update(kinship)
+
+    return response.status(204).json()
+  }
 }

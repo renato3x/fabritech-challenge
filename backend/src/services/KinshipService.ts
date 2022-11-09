@@ -14,4 +14,15 @@ export default class KinshipService {
       throw new ServerError(500, 'Error at create kinships')
     }
   }
+
+  static async update(kinship: Partial<Kinship>): Promise<void> {
+    try {
+      const id = kinship.id as number
+      delete kinship.id
+      
+      await this.kinshipRepository.update(id, kinship)
+    } catch (error) {
+      throw new ServerError(500, 'Error at update kinships')
+    }
+  }
 }
