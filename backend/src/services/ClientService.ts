@@ -59,4 +59,15 @@ export default class ClientService {
       throw new ServerError(500, 'Error at delete client')
     }
   }
+
+  static async update(client: Partial<Client>): Promise<void> {
+    try {
+      const id = client.id as number
+      delete client.id
+      
+      await this.clientRepository.update(id, client)
+    } catch (error) {
+      throw new ServerError(500, 'Error at update client')
+    }
+  }
 }
