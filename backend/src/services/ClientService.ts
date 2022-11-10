@@ -3,11 +3,14 @@ import { Client } from "@database/entities/Client";
 import { ServerError } from "@errors/ServerError";
 import { Repository } from "typeorm";
 import AddressService from "./AddressService";
+import ValidationService from "./ValidationService";
 
 export default class ClientService {
   private static readonly clientRepository: Repository<Client> = dataSource.getRepository(Client)
 
   static async create(client: Client): Promise<Client> {
+    await ValidationService.hasEmpty(client)
+
     try {
       delete client.id
       const newClient = await this.clientRepository.save(client)

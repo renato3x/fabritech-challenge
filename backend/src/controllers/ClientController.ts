@@ -23,8 +23,6 @@ export default class ClientController {
     const requestBody: Client = request.body
     const client = new Client(requestBody)
 
-    await ValidationService.hasEmpty(client)
-
     const savedClient = await ClientService.create(client)
 
     return response.status(201).json(savedClient)
