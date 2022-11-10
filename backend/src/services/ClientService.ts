@@ -106,17 +106,18 @@ export default class ClientService {
 
       const clientExists = await this.findById(id)
 
-      if (clientExists) {
-        await this.clientRepository.update(id, client)
+      if (!clientExists) {
+        throw new ServerError(404, 'Client to update not found')
       }
-      
-      throw new ServerError(404, 'Client to update not found')
+
+      Object.assign(clientExists, client)
+      await this.clientRepository.save(clientExists)
     } catch (error) {
       if (error instanceof ServerError) {
         throw error
       }
-
-      throw new ServerError(500, 'Error at recover client')
+      
+      throw new ServerError(500, 'Internal server error')
     }
   }
 }
