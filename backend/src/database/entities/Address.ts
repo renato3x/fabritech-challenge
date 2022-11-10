@@ -34,4 +34,8 @@ export class Address {
   @Column()
   @IsNotEmpty({ message: '$property is required' })
   complement: string
+
+  constructor(address: Partial<Address>) {
+    Object.assign(this, address)
+  }
 }
