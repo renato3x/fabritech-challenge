@@ -10,6 +10,7 @@ export default class ClientService {
 
   static async create(client: Client): Promise<Client> {
     await ValidationService.hasEmpty(client)
+    await ValidationService.throwIfHasUnique(this.clientRepository, client)
 
     try {
       delete client.id
