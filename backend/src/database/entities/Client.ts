@@ -22,27 +22,19 @@ export class Client {
   @IsNotEmpty({ message: '$property is required' })
   birthDate: Date
 
-  @Column({
-    unique: true
-  })
+  @Column()
   @IsNotEmpty({ message: '$property is required' })
   cpf: string
 
-  @Column({
-    unique: true
-  })
+  @Column()
   @IsNotEmpty({ message: '$property is required' })
   rg: string
 
-  @Column({
-    unique: true
-  })
+  @Column()
   @IsNotEmpty({ message: '$property is required' })
   telephone: string
 
-  @Column({
-    unique: true
-  })
+  @Column()
   @IsNotEmpty({ message: '$property is required' })
   email: string
 

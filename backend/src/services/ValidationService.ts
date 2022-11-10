@@ -47,14 +47,14 @@ export default class ValidationService {
   }
 
   private static filterUniqueKeys(uniques: UniqueMetadata[]) {
+    if (uniques.length > 0) {
+      return uniques.map(unique => {
+        return (unique.givenColumnNames as string[])[0]
+      }) 
+    }
+
     return uniques.map(unique => {
-      const key = unique.givenColumnNames as string[]
-
-      if (key.length > 1) {
-        return null
-      }
-
-      return key[0]
-    }).filter(key => key != null) as string[]
+      return unique.givenColumnNames as string[]
+    }).flat()
   }
 }
