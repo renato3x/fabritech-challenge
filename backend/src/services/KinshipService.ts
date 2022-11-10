@@ -25,11 +25,29 @@ export default class KinshipService {
   }
 
   static async update(kinship: Partial<Kinship>): Promise<void> {
+    if (!kinship.id) {
+      throw new ServerError(400, 'id is required')
+    }
+
+    const kinshipWithoutId = { ...kinship }
+    delete kinshipWithoutId.id
+
+    if (ValidationService.isEmpty(kinshipWithoutId)) {
+      throw new ServerError(400, 'Not data to update')
+    }
+
     try {
       const id = kinship.id as number
       delete kinship.id
-      
-      await this.kinshipRepository.update(id, kinship)
+
+      const kinshipExists = await this.findById(id)
+
+      if (!kinshipExists) {
+        throw new ServerError(404, 'Kinship to update not found')
+      }
+
+      Object.assign(kinshipExists, kinship)
+      await this.kinshipRepository.save(kinshipExists)
     } catch (error) {
       throw new ServerError(500, 'Error at update kinship')
     }
@@ -40,6 +58,28 @@ export default class KinshipService {
       await this.kinshipRepository.delete(id)
     } catch (error) {
       throw new ServerError(500, 'Error at delete kinship')
+    }
+  }
+
+  private static async findById(id: number) {
+    try {
+      const kinship = await this.kinshipRepository.findOne({
+        where: {
+          id
+        }
+      })
+  
+      if (!kinship) {
+        throw new ServerError(404, 'Kinship not found')
+      }
+  
+      return kinship
+    } catch (error) {
+      if (error instanceof ServerError) {
+        throw error
+      }
+
+      throw new ServerError(500, 'Internal server error')
     }
   }
 }
