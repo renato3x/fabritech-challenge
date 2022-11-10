@@ -80,13 +80,39 @@ export default class ClientService {
   }
 
   static async update(client: Partial<Client>): Promise<void> {
+
+    if (!client.id) {
+      throw new ServerError(400, 'id is required')
+    }
+
+    const clientWithoutId = { ...client }
+    delete clientWithoutId.id
+
+    if (ValidationService.isEmpty(clientWithoutId)) {
+      throw new ServerError(400, 'Not data to update')
+    }
+
     try {
       const id = client.id as number
       delete client.id
+
+      const clientExists = await this.clientRepository.findOne({
+        where: {
+          id
+        }
+      })
+
+      if (clientExists) {
+        await this.clientRepository.update(id, client)
+      }
       
-      await this.clientRepository.update(id, client)
+      throw new ServerError(404, 'Client to update not found')
     } catch (error) {
-      throw new ServerError(500, 'Error at update client')
+      if (error instanceof ServerError) {
+        throw error
+      }
+
+      throw new ServerError(500, 'Error at recover client')
     }
   }
 }

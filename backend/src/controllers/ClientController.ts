@@ -43,10 +43,6 @@ export default class ClientController {
   static async update(request: Request, response: Response) {
     const client: Partial<Client> = request.body
 
-    if (ValidationService.isEmpty(client) || !client.id) {
-      throw new ServerError(400, 'Insufficient data to update a Address')
-    }
-
     await ClientService.update(client)
 
     return response.status(204).json()
