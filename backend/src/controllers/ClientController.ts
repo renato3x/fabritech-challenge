@@ -28,11 +28,10 @@ export default class ClientController {
   }
 
   static async create(request: Request, response: Response) {
-    const client: Client = request.body
+    const requestBody: Client = request.body
+    const client = new Client(requestBody)
 
-    if (ValidationService.isEmpty(client)) {
-      throw new ServerError(400, 'Insufficient data to create a Client')
-    }
+    await ValidationService.hasEmpty(client)
 
     const savedClient = await ClientService.create(client)
 
