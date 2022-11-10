@@ -1,7 +1,5 @@
 import { Kinship } from "@database/entities/Kinship";
-import { ServerError } from "@errors/ServerError";
 import KinshipService from "@services/KinshipService";
-import ValidationService from "@services/ValidationService";
 import { Request, Response } from "express";
 
 export default class KinshipController {
@@ -23,10 +21,6 @@ export default class KinshipController {
 
   static async delete(request: Request, response: Response) {
     const id = request.params.id
-
-    if (isNaN(Number(id))) {
-      throw new ServerError(400, '\'id\' is invalid')
-    }
 
     await KinshipService.deleteById(parseInt(id))
 

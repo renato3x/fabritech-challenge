@@ -54,10 +54,24 @@ export default class KinshipService {
   }
 
   static async deleteById(id: number): Promise<void> {
+    if (isNaN(id)) {
+      throw new ServerError(400, 'The informed id is invalid')
+    }
+
     try {
+      const kinship = await this.findById(id)
+
+      if (!kinship) {
+        throw new ServerError(404, 'Kinship to delete not found')
+      }
+
       await this.kinshipRepository.delete(id)
     } catch (error) {
-      throw new ServerError(500, 'Error at delete kinship')
+      if (error instanceof ServerError) {
+        throw error
+      }
+
+      throw new ServerError(500, 'Internal server error')
     }
   }
 
