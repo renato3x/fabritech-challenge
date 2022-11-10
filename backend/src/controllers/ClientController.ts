@@ -1,7 +1,5 @@
 import { Client } from "@database/entities/Client";
-import { ServerError } from "@errors/ServerError";
 import ClientService from "@services/ClientService";
-import ValidationService from "@services/ValidationService";
 import { Request, Response } from "express";
 
 export default class ClientController {
@@ -30,10 +28,6 @@ export default class ClientController {
 
   static async delete(request: Request, response: Response) {
     const { id } = request.params
-
-    if (isNaN(Number(id))) {
-      throw new ServerError(400, '\'id\' is invalid')
-    }
 
     await ClientService.deleteById(parseInt(id))
 

@@ -64,6 +64,10 @@ export default class ClientService {
   }
 
   static async deleteById(id: number): Promise<void> {
+    if (isNaN(id)) {
+      throw new ServerError(400, 'The informed id is invalid')
+    }
+
     try {
       const client = await this.findById(id)
       
@@ -75,6 +79,10 @@ export default class ClientService {
 
       await AddressService.deleteById(addressId)
     } catch (error) {
+      if (error instanceof ServerError) {
+        throw error
+      }
+
       throw new ServerError(500, 'Error at delete client')
     }
   }
@@ -96,11 +104,7 @@ export default class ClientService {
       const id = client.id as number
       delete client.id
 
-      const clientExists = await this.clientRepository.findOne({
-        where: {
-          id
-        }
-      })
+      const clientExists = await this.findById(id)
 
       if (clientExists) {
         await this.clientRepository.update(id, client)
