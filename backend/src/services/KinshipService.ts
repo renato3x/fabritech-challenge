@@ -2,11 +2,20 @@ import { dataSource } from "@database/dataSource";
 import { Kinship } from "@database/entities/Kinship";
 import { ServerError } from "@errors/ServerError";
 import { Repository } from "typeorm";
+import ValidationService from "./ValidationService";
 
 export default class KinshipService {
   private static readonly kinshipRepository: Repository<Kinship> = dataSource.getRepository(Kinship)
 
-  static async create(kinships: Kinship[]): Promise<Kinship[]> {
+  static async create(values: Kinship[]): Promise<Kinship[]> {
+    const kinships = values.map(kinship => {
+      return new Kinship(kinship)
+    })
+
+    for (let kinship of kinships) {
+      await ValidationService.hasEmpty(kinship)
+    }
+
     try {
       const newKinships = await this.kinshipRepository.save(kinships)
       return newKinships
