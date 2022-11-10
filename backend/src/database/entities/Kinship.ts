@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Client } from "./Client";
 
 @Entity()
@@ -20,6 +20,12 @@ export class Kinship {
     onDelete: 'CASCADE'
   })
   client: Client
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 
   constructor(kinship: Partial<Kinship>) {
     Object.assign(this, kinship)

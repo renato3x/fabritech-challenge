@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 import { Address } from './Address';
 import { Kinship } from './Kinship';
 import { IsNotEmpty } from 'class-validator'
@@ -52,6 +52,12 @@ export class Client {
   })
   @JoinColumn()
   kinships: Kinship[]
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 
   constructor(user: Partial<Client>) {
     Object.assign(this, user)
