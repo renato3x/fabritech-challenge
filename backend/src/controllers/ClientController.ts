@@ -14,15 +14,7 @@ export default class ClientController {
   static async findById(request: Request, response: Response) {
     const { id } = request.params
 
-    if (isNaN(Number(id))) {
-      throw new ServerError(400, '\'id\' is invalid')
-    }
-
     const client = await ClientService.findById(parseInt(id))
-
-    if (!client) {
-      throw new ServerError(404, 'Client not found')
-    }
 
     return response.status(200).json(client)
   }

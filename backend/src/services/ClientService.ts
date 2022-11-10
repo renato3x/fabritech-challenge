@@ -17,9 +17,13 @@ export default class ClientService {
     }
   }
 
-  static async findById(id: number): Promise<Client | null> {
+  static async findById(id: number) {
+    if (isNaN(id)) {
+      throw new ServerError(400, 'The informed id is invalid')
+    }
+
     try {
-      return this.clientRepository.findOne({
+      const client = await this.clientRepository.findOne({
         where: {
           id
         },
@@ -28,7 +32,17 @@ export default class ClientService {
           kinships: true
         }
       })
+
+      if (!client) {
+        throw new ServerError(404, 'Client not found')
+      }
+
+      return client
     } catch (error) {
+      if (error instanceof ServerError) {
+        throw error
+      }
+
       throw new ServerError(500, 'Error at recover client')
     }
   }
