@@ -15,7 +15,9 @@ module.exports = {
         '@database': './src/database',
         '@services': './src/services',
         '@middlewares': './src/middlewares',
-        '@errors': './src/errors'
+        '@errors': './src/errors',
+        '@config': './src/config',
+        '@interfaces': './src/interfaces'
       }
     }]
   ]
