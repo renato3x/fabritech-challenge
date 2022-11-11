@@ -5,30 +5,30 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 export class User {
   
   @PrimaryGeneratedColumn('increment')
-  id: number
+  id?: number
 
   @Column()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '$property is required' })
   firstName: string
 
   @Column()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '$property is required' })
   lastName: string
 
   @Column({
     unique: true
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '$property is required' })
   username: string
 
   @Column({
     unique: true
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '$property is required' })
   email: string
 
   @Column()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '$property is required' })
   password: string
 
   @CreateDateColumn()

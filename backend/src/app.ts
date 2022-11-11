@@ -5,6 +5,7 @@ import indexRouter from '@routes/indexRoutes'
 import addressRouter from '@routes/addressRoutes'
 import clientRouter from '@routes/clientRoutes'
 import kinshipRouter from '@routes/kinshipRoutes'
+import userRouter from '@routes/userRoutes'
 import ErrorHandler from '@middlewares/ErrorHandler'
 
 import '@database/connection'
@@ -19,6 +20,7 @@ app.use(indexRouter)
 app.use(addressRouter)
 app.use(clientRouter)
 app.use(kinshipRouter)
+app.use(userRouter)
 app.use(ErrorHandler)
 
 export default app
