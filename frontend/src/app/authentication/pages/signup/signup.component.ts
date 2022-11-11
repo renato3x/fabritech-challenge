@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -17,11 +18,14 @@ export class SignupComponent implements OnInit {
     confirmPassword: ['', [ Validators.required, Validators.minLength(10) ]]
   })
 
+  passwordIsEquals: boolean = false
+
   constructor(
     private builder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.testPasswordEquality()
   }
 
   togglePasswordFieldType(input: HTMLInputElement) {
@@ -32,5 +36,26 @@ export class SignupComponent implements OnInit {
     } else {
       input.type = 'password'
     }
+  }
+
+  testPasswordEquality() {
+    this.userForm.valueChanges
+    .pipe(
+      map(changes => {
+        const { confirmPassword } = changes
+        const { password } = this.userForm.value
+
+        if (confirmPassword) {
+          return confirmPassword === password
+        }
+
+        return false
+      })
+    )
+    .subscribe(
+      isEquals => {
+        this.passwordIsEquals = isEquals
+      }
+    )
   }
 }

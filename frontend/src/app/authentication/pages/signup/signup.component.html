@@ -31,7 +31,7 @@
           <input type="password" matInput formControlName="confirmPassword" #confirmPasswordField>
           <mat-icon matSuffix class="pointer" (click)="togglePasswordFieldType(confirmPasswordField)">visibility</mat-icon>
         </mat-form-field>
-        <button type="submit"mat-flat-button color="primary" id="submit" [disabled]="userForm.invalid">Cadastrar</button>
+        <button type="submit"mat-flat-button color="primary" id="submit" [disabled]="userForm.invalid || !passwordIsEquals">Cadastrar</button>
       </form>
       <p id="already-registered">
         Já está cadastrado? <a href="/authentication/login">Entrar</a>
