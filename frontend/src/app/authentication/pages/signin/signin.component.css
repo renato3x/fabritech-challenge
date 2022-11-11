@@ -1,0 +1,17 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f51b5;
+}
+
+#signin-form {
+  width: 425px;
+  display: grid;
+}
+
+#not-registered {
+  margin-top: 16px;
+  text-align: center;
+}
