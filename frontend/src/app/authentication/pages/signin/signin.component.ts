@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -43,7 +44,23 @@ export class SigninComponent implements OnInit {
         this.router.navigateByUrl('/clients')
       })
     )
-    .subscribe()
+    .subscribe({
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
+        } else {
+          this.snackbar.open('Ocorreu um erro ao entrar', 'Ok', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
+        }
+      }
+    })
   }
 
   private buildUser() {
