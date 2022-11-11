@@ -1,1 +1,39 @@
-<p>signup works!</p>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Cadastre-se</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form action="#" id="signup-form">
+        <mat-form-field appearance="outline" id="first-name">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="last-name">
+          <mat-label>Sobrenome</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="username">
+          <mat-label>Nome de usuário</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="email">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="password">
+          <mat-label>Senha</mat-label>
+          <input type="password" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="confirm-password">
+          <mat-label>Confirme a senha</mat-label>
+          <input type="password" matInput>
+        </mat-form-field>
+        <button type="submit"mat-flat-button color="primary" id="submit">Cadastrar</button>
+      </form>
+      <p id="already-registered">
+        Já está cadastrado? <a href="/authentication/login">Entrar</a>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

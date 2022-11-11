@@ -1,0 +1,56 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f51b5;
+}
+
+#signup-form {
+  width: 425px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    'fn ln'
+    'un un'
+    'em em'
+    'pw pw'
+    'cpw cpw'
+    'sub sub'
+  ;
+  column-gap: 5px;
+}
+
+#first-name {
+  grid-area: fn;
+}
+
+#last-name {
+  grid-area: ln;
+}
+
+#username {
+  grid-area: un;
+}
+
+#email {
+  grid-area: em;
+}
+
+#password {
+  grid-area: pw;
+}
+
+#confirm-password {
+  grid-area: cpw;
+}
+
+#submit {
+  grid-area: sub;
+}
+
+#already-registered {
+  margin-top: 16px;
+  text-align: center;
+}
