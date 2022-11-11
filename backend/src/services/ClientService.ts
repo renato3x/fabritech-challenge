@@ -8,7 +8,8 @@ import ValidationService from "./ValidationService";
 export default class ClientService {
   private static readonly clientRepository: Repository<Client> = dataSource.getRepository(Client)
 
-  static async create(client: Client): Promise<Client> {
+  static async create(c: Client): Promise<Client> {
+    const client = new Client(c)
     await ValidationService.hasEmpty(client)
     await ValidationService.throwIfHasUnique(this.clientRepository, client)
 

@@ -18,8 +18,7 @@ export default class ClientController {
   }
 
   static async create(request: Request, response: Response) {
-    const requestBody: Client = request.body
-    const client = new Client(requestBody)
+    const client: Client = request.body
 
     const savedClient = await ClientService.create(client)
 
