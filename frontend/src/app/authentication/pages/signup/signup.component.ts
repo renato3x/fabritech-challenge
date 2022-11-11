@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { User } from 'src/app/globals/models/User';
 import { AuthenticationService } from 'src/app/globals/services/authentication.service';
@@ -26,7 +27,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private authService: AuthenticationService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -70,12 +72,13 @@ export class SignupComponent implements OnInit {
     this.authService.signup(user)
     .subscribe(
       user => {
-        console.log(user)
         this.snackbar.open('Você foi cadastrado com sucesso!', 'Ok', {
           duration: 5000,
           horizontalPosition: 'right',
           verticalPosition: 'top'
         })
+
+        this.router.navigateByUrl('/authentication/signin')
       }
     )
   }
