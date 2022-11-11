@@ -37,6 +37,12 @@
       ],
       "@errors/*": [
         "./src/errors/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
       ]
     },
     "typeRoots": [
