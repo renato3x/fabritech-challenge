@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -71,7 +72,7 @@ export class SignupComponent implements OnInit {
 
     this.authService.signup(user)
     .subscribe(
-      user => {
+      () => {
         this.snackbar.open('Você foi cadastrado com sucesso!', 'Ok', {
           duration: 5000,
           horizontalPosition: 'right',
@@ -79,6 +80,21 @@ export class SignupComponent implements OnInit {
         })
 
         this.router.navigateByUrl('/authentication/signin')
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
+        } else {
+          this.snackbar.open('Ocorreu algum erro ao cadastrar :(', 'Ok', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
+        }
       }
     )
   }
