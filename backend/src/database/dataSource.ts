@@ -17,6 +17,5 @@ export const dataSource: DataSource = new DataSource({
   entities: [Address, Client, Kinship, User],
   extra: {
     trustServerCertificate: true
-  },
-  dropSchema: true
+  }
 })
