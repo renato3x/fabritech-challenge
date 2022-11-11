@@ -23,4 +23,14 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  togglePasswordFieldType(input: HTMLInputElement) {
+    const type = input.type
+
+    if (type ==  'password') {
+      input.type = 'text'
+    } else {
+      input.type = 'password'
+    }
+  }
 }
