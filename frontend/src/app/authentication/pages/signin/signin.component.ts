@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
+import { User } from 'src/app/globals/models/User';
+import { AuthenticationService } from 'src/app/globals/services/authentication.service';
+import validator from 'validator';
 
 @Component({
   selector: 'app-signin',
@@ -14,9 +18,35 @@ export class SigninComponent implements OnInit {
   })
 
   constructor(
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  signin() {
+    const user = this.buildUser()
+    this.authService.signin(user)
+    .subscribe(
+      () => {
+        alert('Logado com sucesso')
+      }
+    )
+  }
+
+  private buildUser() {
+    const data = this.signinForm.value
+    const user: Partial<User> = {
+      password: data.password
+    }
+
+    if (validator.isEmail(data.login)) {
+      user.email = data.login
+    } else {
+      user.username = data.login
+    }
+
+    return user
   }
 }

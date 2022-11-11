@@ -5,7 +5,7 @@
       <mat-card-title>Entrar</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form action="#" id="signin-form" [formGroup]="signinForm">
+      <form action="#" id="signin-form" [formGroup]="signinForm" (ngSubmit)="signin()">
         <mat-form-field appearance="outline">
           <mat-label>E-mail ou username</mat-label>
           <input type="text" matInput formControlName="login">
