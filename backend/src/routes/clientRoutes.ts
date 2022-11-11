@@ -1,12 +1,13 @@
 import { Router } from "express";
 import ClientController from "@controllers/ClientController";
+import TokenVerify from "@middlewares/TokenVerify";
 
 const router = Router()
 
-router.get('/client', ClientController.index)
-router.get('/client/:id', ClientController.findById)
-router.post('/client', ClientController.create)
-router.delete('/client/:id', ClientController.delete)
-router.put('/client', ClientController.update)
+router.get('/client', [ TokenVerify ], ClientController.index)
+router.get('/client/:id', [ TokenVerify ], ClientController.findById)
+router.post('/client', [ TokenVerify ], ClientController.create)
+router.delete('/client/:id', [ TokenVerify ], ClientController.delete)
+router.put('/client', [ TokenVerify ], ClientController.update)
 
 export default router

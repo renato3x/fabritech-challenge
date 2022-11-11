@@ -1,10 +1,11 @@
 import { Router } from "express";
 import KinshipController from '@controllers/KinshipController'
+import TokenVerify from "@middlewares/TokenVerify";
 
 const router = Router()
 
-router.post('/kinship', KinshipController.create)
-router.put('/kinship', KinshipController.update)
-router.delete('/kinship/:id', KinshipController.delete)
+router.post('/kinship', [ TokenVerify ], KinshipController.create)
+router.put('/kinship', [ TokenVerify ], KinshipController.update)
+router.delete('/kinship/:id', [ TokenVerify ], KinshipController.delete)
 
 export default router
