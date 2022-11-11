@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { User } from 'src/app/globals/models/User';
 import { AuthenticationService } from 'src/app/globals/services/authentication.service';
@@ -19,7 +21,9 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,11 +32,18 @@ export class SigninComponent implements OnInit {
   signin() {
     const user = this.buildUser()
     this.authService.signin(user)
-    .subscribe(
-      () => {
-        alert('Logado com sucesso')
-      }
+    .pipe(
+      tap(() => {
+        this.snackbar.open('Logado com sucesso', 'Ok', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        })
+
+        this.router.navigateByUrl('/clients')
+      })
     )
+    .subscribe()
   }
 
   private buildUser() {
