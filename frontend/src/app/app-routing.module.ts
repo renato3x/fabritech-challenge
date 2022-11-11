@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'signin'
+  },
+  {
+    path: 'clients',
+    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
   }
 ]
 
