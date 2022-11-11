@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs';
+import { User } from 'src/app/globals/models/User';
+import { AuthenticationService } from 'src/app/globals/services/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +24,9 @@ export class SignupComponent implements OnInit {
   passwordIsEquals: boolean = false
 
   constructor(
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private authService: AuthenticationService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +62,28 @@ export class SignupComponent implements OnInit {
         this.passwordIsEquals = isEquals
       }
     )
+  }
+
+  signup() {
+    const user = this.buildUser()
+
+    this.authService.signup(user)
+    .subscribe(
+      user => {
+        console.log(user)
+        this.snackbar.open('Você foi cadastrado com sucesso!', 'Ok', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        })
+      }
+    )
+  }
+
+  private buildUser(): User {
+    const user = { ...this.userForm.value }
+    delete user.confirmPassword
+
+    return user as User
   }
 }

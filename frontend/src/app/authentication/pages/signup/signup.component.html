@@ -4,7 +4,7 @@
       <mat-card-title>Cadastre-se</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form action="#" id="signup-form" [formGroup]="userForm">
+      <form action="#" id="signup-form" [formGroup]="userForm" (ngSubmit)="signup()">
         <mat-form-field appearance="outline" id="first-name">
           <mat-label>Nome</mat-label>
           <input type="text" matInput formControlName="firstName">
