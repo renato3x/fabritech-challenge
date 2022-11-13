@@ -5,7 +5,7 @@
   }"
 >
   <p *ngIf="clients.length === 0" class="no-clients">Sem clientes registrados</p>
-  <button mat-mini-fab matTooltip="Novo cliente" matTooltipPosition="left" id="add-client">
+  <button mat-mini-fab matTooltip="Novo cliente" matTooltipPosition="left" id="add-client" routerLink="/clients/new">
     <mat-icon>add</mat-icon>
   </button>
 </div>
