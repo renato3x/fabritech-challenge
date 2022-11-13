@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Token } from '../models/Token';
 import { User } from '../models/User';
@@ -20,7 +20,8 @@ export class AuthenticationService {
 
   get isTokenValid() {
     const token = this.getToken()
-    return !this.jwtHelper.isTokenExpired(token.token)
+    const isValid = !this.jwtHelper.isTokenExpired(token.token)
+    return of(isValid)
   }
 
   signup(user: User): Observable<User> {
