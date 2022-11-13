@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" *ngIf="navbarService.showNavbar$ | async" id="navbar">
-  <h1>Olá, Renato Pereira</h1>
+  <h1>Olá, {{ user.firstName || '' }} {{ user.lastName || '' }}</h1>
   <button mat-icon-button color="basic" matTooltip="Sair" matTooltipPosition="left">
     <mat-icon>logout</mat-icon>
   </button>

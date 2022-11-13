@@ -24,6 +24,14 @@ export class AuthenticationService {
     return of(isValid)
   }
 
+  get userData() {
+    const token = this.getToken()
+    const user = this.jwtHelper.decodeToken(token.token)
+    delete user.iat
+    delete user.exp
+    return user as Partial<User>
+  }
+
   signup(user: User): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/register`, user)
   }

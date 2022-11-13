@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/User';
 import { AuthenticationService } from '../../services/authentication.service';
 import { NavbarService } from '../../services/navbar.service';
 
@@ -9,10 +10,14 @@ import { NavbarService } from '../../services/navbar.service';
 })
 export class NavbarComponent implements OnInit {
 
+  user: Partial<User> = {}
+
   constructor(
-    public navbarService: NavbarService
+    public navbarService: NavbarService,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+    this.user = this.authService.userData
   }
 }
