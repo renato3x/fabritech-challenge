@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" *ngIf="navbarService.showNavbar$ | async" id="navbar">
   <h1>Olá, {{ user.firstName || '' }} {{ user.lastName || '' }}</h1>
-  <button mat-icon-button color="basic" matTooltip="Sair" matTooltipPosition="left">
+  <button mat-icon-button color="basic" matTooltip="Sair" matTooltipPosition="left" (click)="authService.signout()">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

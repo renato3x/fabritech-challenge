@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,7 +16,8 @@ export class AuthenticationService {
   private jwtHelper = new JwtHelperService()
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   get isTokenValid() {
@@ -41,6 +43,16 @@ export class AuthenticationService {
     .pipe(
       tap(this.saveToken)
     )
+  }
+
+  signout() {
+    const token: Token = {
+      token: '',
+      type: ''
+    }
+
+    localStorage.setItem('token', JSON.stringify(token))
+    this.router.navigateByUrl('/signin')
   }
 
   saveToken(token: Token) {

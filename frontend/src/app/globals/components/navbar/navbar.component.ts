@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     public navbarService: NavbarService,
-    private authService: AuthenticationService
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
