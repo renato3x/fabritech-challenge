@@ -1,1 +1,6 @@
-<p *ngIf="navbarService.showNavbar$ | async">navbar works!</p>
+<mat-toolbar color="primary" *ngIf="navbarService.showNavbar$ | async" id="navbar">
+  <h1>Olá, Renato Pereira</h1>
+  <button mat-icon-button color="basic" matTooltip="Sair" matTooltipPosition="left">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
