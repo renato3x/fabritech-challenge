@@ -1,1 +1,75 @@
-<p>new-client works!</p>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Novo Cliente</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form action="#" id="client-form">
+        <mat-form-field appearance="outline" id="first-name">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="last-name">
+          <mat-label>Sobrenome</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="cpf">
+          <mat-label>CPF</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="rg">
+          <mat-label>RG</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="birth-date">
+          <mat-label>Data de nascimento</mat-label>
+          <input type="text" matInput [matDatepicker]="picker">
+          <mat-hint>dd/mm/aaaa</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="telephone">
+          <mat-label>Telefone</mat-label>
+          <input type="tel" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="email">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput>
+        </mat-form-field>
+        <div id="address-fields">
+          <div id="legend">
+            <mat-divider></mat-divider>
+            <h2 class="divider-title">Endereço</h2>
+          </div>
+          <mat-form-field appearance="outline" id="cep">
+            <mat-label>CEP</mat-label>
+            <input type="text" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" id="name">
+            <mat-label>Endereço</mat-label>
+            <input type="text" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" id="numer">
+            <mat-label>Número</mat-label>
+            <input type="number" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" id="district">
+            <mat-label>Bairro</mat-label>
+            <input type="text" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" id="city">
+            <mat-label>Cidade</mat-label>
+            <input type="text" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" id="state">
+            <mat-label>Estado</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let state of states" [value]="state.initials">{{ state.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button type="button" color="primary" id="save">Salvar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
