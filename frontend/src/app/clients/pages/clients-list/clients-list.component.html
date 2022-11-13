@@ -1,1 +1,11 @@
-<p>clients-list works!</p>
+<div
+  class="container"
+  [ngClass]="{
+    center: clients.length === 0
+  }"
+>
+  <p *ngIf="clients.length === 0" class="no-clients">Sem clientes registrados</p>
+  <button mat-mini-fab matTooltip="Novo cliente" matTooltipPosition="left" id="add-client">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,21 @@
+.container {
+  min-height: calc(100vh - 64px);
+  position: relative;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-clients {
+  font-size: 20px;
+}
+
+#add-client {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+}
