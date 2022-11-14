@@ -151,8 +151,8 @@ export class NewClientComponent implements OnInit {
 
   addKinship() {
     this.kinships.push(this.builder.group({
-      name: [''],
-      kinship: ['']
+      name: ['', [ Validators.required ]],
+      kinship: ['', [ Validators.required ]]
     }))
   }
 }
