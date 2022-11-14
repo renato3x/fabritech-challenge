@@ -7,35 +7,35 @@
       <form action="#" id="client-form" [formGroup]="clientForm" (ngSubmit)="save()">
         <mat-form-field appearance="outline" id="first-name">
           <mat-label>Nome</mat-label>
-          <input type="text" matInput formControlName="firstName">
+          <input type="text" matInput formControlName="firstName" name="firstName">
         </mat-form-field>
         <mat-form-field appearance="outline" id="last-name">
           <mat-label>Sobrenome</mat-label>
-          <input type="text" matInput formControlName="lastName">
+          <input type="text" matInput formControlName="lastName" name="lastName">
         </mat-form-field>
         <mat-form-field appearance="outline" id="cpf">
           <mat-label>CPF</mat-label>
-          <input type="text" matInput formControlName="cpf" [value]="clientForm.value.cpf | cpf">
+          <input type="text" matInput formControlName="cpf" [value]="clientForm.value.cpf | cpf" name="cpf">
           <mat-hint>Apenas números</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline" id="rg">
           <mat-label>RG</mat-label>
-          <input type="text" matInput formControlName="rg">
+          <input type="text" matInput formControlName="rg" name="rg">
         </mat-form-field>
         <mat-form-field appearance="outline" id="birth-date">
           <mat-label>Data de nascimento</mat-label>
-          <input type="text" matInput [matDatepicker]="picker" formControlName="birthDate">
+          <input type="text" matInput [matDatepicker]="picker" formControlName="birthDate" name="birthDate">
           <mat-hint>dd/mm/aaaa</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline" id="telephone">
           <mat-label>Telefone</mat-label>
-          <input type="tel" matInput formControlName="telephone" [value]="clientForm.value.telephone | telephone">
+          <input type="tel" matInput formControlName="telephone" [value]="clientForm.value.telephone | telephone" name="telephone">
         </mat-form-field>
         <mat-form-field appearance="outline" id="email">
           <mat-label>E-mail</mat-label>
-          <input type="email" matInput formControlName="email">
+          <input type="email" matInput formControlName="email" name="email">
         </mat-form-field>
         <div id="address-fields" formGroupName="address">
           <div id="legend">
@@ -44,33 +44,33 @@
           </div>
           <mat-form-field appearance="outline" id="signincep">
             <mat-label>CEP</mat-label>
-            <input type="text" matInput formControlName="cep" [value]="clientForm.value.address.cep | cep" #cepInput (input)="emitCep(cepInput.value)">
+            <input type="text" matInput formControlName="cep" [value]="clientForm.value.address.cep | cep" #cepInput (input)="emitCep(cepInput.value)" name="cep">
           </mat-form-field>
           <mat-form-field appearance="outline" id="name">
             <mat-label>Endereço</mat-label>
-            <input type="text" matInput formControlName="name">
+            <input type="text" matInput formControlName="name" name="name">
           </mat-form-field>
           <mat-form-field appearance="outline" id="numer">
             <mat-label>Número</mat-label>
-            <input type="number" matInput formControlName="number">
+            <input type="number" matInput formControlName="number" name="number">
           </mat-form-field>
           <mat-form-field appearance="outline" id="district">
             <mat-label>Bairro</mat-label>
-            <input type="text" matInput formControlName="district">
+            <input type="text" matInput formControlName="district" name="district">
           </mat-form-field>
           <mat-form-field appearance="outline" id="city">
             <mat-label>Cidade</mat-label>
-            <input type="text" matInput formControlName="city">
+            <input type="text" matInput formControlName="city" name="city">
           </mat-form-field>
           <mat-form-field appearance="outline" id="state">
             <mat-label>Estado</mat-label>
-            <mat-select formControlName="state">
+            <mat-select formControlName="state" name="state">
               <mat-option *ngFor="let state of states" [value]="state.initials">{{ state.name }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" id="complement">
             <mat-label>Complemento</mat-label>
-            <input type="text" matInput formControlName="complement">
+            <input type="text" matInput formControlName="complement" name="complement">
           </mat-form-field>
         </div>
         <div id="kinship-fields" formArrayName="kinships">
@@ -81,11 +81,11 @@
           <div class="kinship" *ngFor="let kinship of kinships.controls; let idx = index" [formGroupName]="idx">
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
-              <input type="text" matInput formControlName="name">
+              <input type="text" matInput formControlName="name" name="kinshipName">
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Parentesco</mat-label>
-              <input type="text" matInput formControlName="kinship">
+              <input type="text" matInput formControlName="kinship" name="kinship">
             </mat-form-field>
             <button mat-icon-button color="warn" (click)="removeKinship(idx)">
               <mat-icon>delete</mat-icon>
