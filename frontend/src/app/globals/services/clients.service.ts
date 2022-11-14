@@ -23,6 +23,10 @@ export class ClientsService {
     return this.http.get<Client[]>(this.baseUrl)
   }
 
+  getById(id: number): Observable<Client> {
+    return this.http.get<Client>(`${this.baseUrl}/${id}`)
+  }
+
   create(client: Client): Observable<Client> {
     return this.kinshipsService
     .create(client.kinships)
