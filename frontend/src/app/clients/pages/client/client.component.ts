@@ -17,8 +17,8 @@ export class ClientComponent implements OnInit {
     firstName: ['', [ Validators.required ]],
     lastName: ['', [ Validators.required ]],
     birthDate: ['', [ Validators.required ]],
-    cpf: ['', [ Validators.required ]],
-    rg: ['', [ Validators.required ]],
+    cpf: ['', [ Validators.required, Validators.minLength(11), Validators.maxLength(14) ]],
+    rg: ['', [ Validators.required, Validators.minLength(7), Validators.maxLength(7) ]],
     telephone: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]]
   })
@@ -26,7 +26,7 @@ export class ClientComponent implements OnInit {
   addressForm: FormGroup = this.builder.group({
     city: ['', [ Validators.required ]],
     name: ['', [ Validators.required ]],
-    cep: ['', [ Validators.required ]],
+    cep: ['', [ Validators.required, Validators.minLength(8), Validators.maxLength(9) ]],
     number: ['', [ Validators.required ]],
     district: ['', [ Validators.required ]],
     state: ['', [ Validators.required ]],
