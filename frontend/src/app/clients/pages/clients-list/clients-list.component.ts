@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Client } from 'src/app/globals/models/Client';
 import { ClientsService } from 'src/app/globals/services/clients.service';
+import { ConfirmClientDeletionComponent } from '../../components/confirm-client-deletion/confirm-client-deletion.component';
 
 @Component({
   selector: 'app-clients-list',
@@ -16,7 +18,8 @@ export class ClientsListComponent implements OnInit {
 
   constructor(
     private clientsService: ClientsService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -33,17 +36,25 @@ export class ClientsListComponent implements OnInit {
   }
 
   deleteClient(id: number) {
-    this.clientsService.delete(id)
+    this.dialog.open(ConfirmClientDeletionComponent)
+    .afterClosed()
     .subscribe(
-      () => {
-        this.snackbar.open('Cliente deletado com sucesso!', 'Ok', { duration: 5000 })
-        this.getClients()
-      },
-      error => {
-        if (error instanceof HttpErrorResponse) {
-          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
-        } else {
-          this.snackbar.open('Erro ao deletar cliente', 'Ok', { duration: 5000 })
+      canDelete => {
+        if (canDelete) {
+          this.clientsService.delete(id)
+          .subscribe(
+            () => {
+              this.snackbar.open('Cliente deletado com sucesso!', 'Ok', { duration: 5000 })
+              this.getClients()
+            },
+            error => {
+              if (error instanceof HttpErrorResponse) {
+                this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+              } else {
+                this.snackbar.open('Erro ao deletar cliente', 'Ok', { duration: 5000 })
+              }
+            }
+          )
         }
       }
     )

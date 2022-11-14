@@ -8,13 +8,15 @@ import { NewClientComponent } from './pages/new-client/new-client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientComponent } from './pages/client/client.component';
 import { GlobalsModule } from '../globals/globals.module';
+import { ConfirmClientDeletionComponent } from './components/confirm-client-deletion/confirm-client-deletion.component';
 
 
 @NgModule({
   declarations: [
     ClientsListComponent,
     NewClientComponent,
-    ClientComponent
+    ClientComponent,
+    ConfirmClientDeletionComponent
   ],
   imports: [
     CommonModule,
