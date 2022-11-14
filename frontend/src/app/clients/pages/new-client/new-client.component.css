@@ -109,8 +109,9 @@ mat-card {
 
 .kinship {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 30px;
   column-gap: 5px;
+  align-items: center;
 }
 
 #add-kinship {

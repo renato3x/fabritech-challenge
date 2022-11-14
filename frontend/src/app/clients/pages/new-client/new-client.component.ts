@@ -155,4 +155,8 @@ export class NewClientComponent implements OnInit {
       kinship: ['', [ Validators.required ]]
     }))
   }
+
+  removeKinship(index: number) {
+    this.kinships.removeAt(index)
+  }
 }

@@ -83,6 +83,9 @@
               <mat-label>Parentesco</mat-label>
               <input type="text" matInput formControlName="kinship">
             </mat-form-field>
+            <button mat-icon-button color="warn" (click)="removeKinship(idx)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
           <button type="button" mat-mini-fab id="add-kinship" matTooltip="Adicionar parentesco" matTooltipPosition="right" (click)="addKinship()">
             <mat-icon>add</mat-icon>
