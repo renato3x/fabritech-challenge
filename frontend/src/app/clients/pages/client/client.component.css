@@ -1,0 +1,95 @@
+.container {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px;
+  align-items: center;
+}
+
+#client-data {
+  width: 850px;
+}
+
+#client-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+    'fn ln'
+    'cpf rg'
+    'bd bd'
+    'tp em'
+  ;
+  column-gap: 5px;
+}
+
+#first-name {
+  grid-area: fn;
+}
+
+#last-name {
+  grid-area: ln;
+}
+
+#cpf {
+  grid-area: cpf;
+}
+
+#rg {
+  grid-area: rg;
+}
+
+#birth-date {
+  grid-area: bd;
+}
+
+#telephone {
+  grid-area: tp;
+}
+
+#email {
+  grid-area: em;
+}
+
+#address-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+    'cep add'
+    'num dis'
+    'cit stt'
+    'cmp cmp'
+  ;
+  column-gap: 5px;
+}
+
+#cep{
+  grid-area: cep;
+}
+
+#name{
+  grid-area: add;
+}
+
+#number{
+  grid-area: num;
+}
+
+#district{
+  grid-area: dis;
+}
+
+#city{
+  grid-area: cit;
+}
+
+#state{
+  grid-area: stt;
+}
+
+#complement{
+  grid-area: cmp;
+}
+
