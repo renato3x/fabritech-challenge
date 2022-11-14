@@ -44,7 +44,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let client">
-          <button mat-icon-button color="warn" matTooltip="Excluir cliente">
+          <button mat-icon-button color="warn" matTooltip="Excluir cliente" (click)="deleteClient(client.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

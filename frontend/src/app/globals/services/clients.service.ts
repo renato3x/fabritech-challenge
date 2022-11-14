@@ -38,6 +38,10 @@ export class ClientsService {
     )
   }
 
+  delete(id: number) {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
+  }
+
   private hasKinship(client: Client): boolean {
     return client.kinships.length > 0
   }
