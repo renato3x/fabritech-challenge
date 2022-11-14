@@ -18,12 +18,17 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken()
 
-    const requestCopy = request.clone({
-      setHeaders: {
-        Authorization: `${token.type} ${token.token}`
-      }
-    })
+    if (token) {
+      const requestCopy = request.clone({
+        setHeaders: {
+          Authorization: `${token.type} ${token.token}`
+        }
+      })
 
-    return next.handle(requestCopy)
+      return next.handle(requestCopy)
+    }
+
+
+    return next.handle(request)
   }
 }

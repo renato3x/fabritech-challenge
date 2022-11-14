@@ -22,13 +22,13 @@ export class AuthenticationService {
 
   get isTokenValid() {
     const token = this.getToken()
-    const isValid = !this.jwtHelper.isTokenExpired(token.token)
+    const isValid = !this.jwtHelper.isTokenExpired(token?.token)
     return of(isValid)
   }
 
   get userData() {
     const token = this.getToken()
-    const user = this.jwtHelper.decodeToken(token.token)
+    const user = this.jwtHelper.decodeToken(token?.token)
     delete user.iat
     delete user.exp
     return user as Partial<User>
@@ -60,6 +60,12 @@ export class AuthenticationService {
   }
 
   getToken() {
-    return JSON.parse(localStorage.getItem('token') as string) as Token
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      return JSON.parse(token) as Token
+    }
+
+    return null
   }
 }
