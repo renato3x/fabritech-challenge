@@ -101,3 +101,18 @@ mat-card {
 #save {
   grid-column: 1/3;
 }
+
+#kinship-fields {
+  grid-column: 1/3;
+  display: grid;
+}
+
+.kinship {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+}
+
+#add-kinship {
+  margin-bottom: 16px;
+}

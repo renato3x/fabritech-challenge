@@ -68,6 +68,25 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div id="kinship-fields">
+          <div>
+            <mat-divider></mat-divider>
+            <h2>Parentescos</h2>
+          </div>
+          <div class="kinship">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input type="text" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Parentesco</mat-label>
+              <input type="text" matInput>
+            </mat-form-field>
+          </div>
+          <button type="button" mat-mini-fab id="add-kinship" matTooltip="Adicionar parentesco" matTooltipPosition="right">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
         <button mat-raised-button type="button" color="primary" id="save">Salvar</button>
       </form>
     </mat-card-content>
