@@ -15,7 +15,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" id="cpf">
           <mat-label>CPF</mat-label>
-          <input type="text" matInput formControlName="cpf">
+          <input type="text" matInput formControlName="cpf" [value]="clientForm.value.cpf | cpf">
           <mat-hint>Apenas números</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline" id="rg">

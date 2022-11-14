@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { NewClientComponent } from './pages/new-client/new-client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientComponent } from './pages/client/client.component';
+import { GlobalsModule } from '../globals/globals.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ClientComponent } from './pages/client/client.component';
     CommonModule,
     ClientsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GlobalsModule
   ]
 })
 export class ClientsModule { }
