@@ -28,12 +28,12 @@
 
       <ng-container matColumnDef="cpf">
         <th mat-header-cell *matHeaderCellDef>CPF</th>
-        <td mat-cell *matCellDef="let client">{{ client.cpf }}</td>
+        <td mat-cell *matCellDef="let client">{{ client.cpf | cpf }}</td>
       </ng-container>
 
       <ng-container matColumnDef="telephone">
         <th mat-header-cell *matHeaderCellDef>Telefone</th>
-        <td mat-cell *matCellDef="let client">{{ client.telephone }}</td>
+        <td mat-cell *matCellDef="let client">{{ client.telephone | telephone }}</td>
       </ng-container>
 
       <ng-container matColumnDef="email">
