@@ -73,27 +73,14 @@ export class SignupComponent implements OnInit {
     this.authService.signup(user)
     .subscribe(
       () => {
-        this.snackbar.open('Você foi cadastrado com sucesso!', 'Ok', {
-          duration: 5000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        })
-
+        this.snackbar.open('Você foi cadastrado com sucesso!', 'Ok', { duration: 5000 })
         this.router.navigateByUrl('/authentication/signin')
       },
       error => {
         if (error instanceof HttpErrorResponse) {
-          this.snackbar.open(error.error.message, 'Ok', {
-            duration: 5000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-          })
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
-          this.snackbar.open('Ocorreu algum erro ao cadastrar :(', 'Ok', {
-            duration: 5000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-          })
+          this.snackbar.open('Ocorreu algum erro ao cadastrar :(', 'Ok', { duration: 5000 })
         }
       }
     )

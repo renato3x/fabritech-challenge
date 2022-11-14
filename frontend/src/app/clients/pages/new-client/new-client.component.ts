@@ -171,11 +171,7 @@ export class NewClientComponent implements OnInit {
     this.clientsService.create(client)
     .subscribe(
       client => {
-        this.snackbar.open('Cliente salvo com sucesso', 'Ok', {
-          duration: 5000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        })
+        this.snackbar.open('Cliente salvo com sucesso', 'Ok', { duration: 5000 })
       }
     )
   }

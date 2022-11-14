@@ -52,7 +52,7 @@ export default class UserService {
 
       const token = JwtService.generate({
         firstName: user.firstName,
-        lastName: user.firstName,
+        lastName: user.lastName,
         username: user.username,
         email: user.email
       }, { expiresIn: '12h' })

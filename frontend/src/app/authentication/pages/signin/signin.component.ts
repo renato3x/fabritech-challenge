@@ -35,29 +35,16 @@ export class SigninComponent implements OnInit {
     this.authService.signin(user)
     .pipe(
       tap(() => {
-        this.snackbar.open('Logado com sucesso', 'Ok', {
-          duration: 5000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        })
-
+        this.snackbar.open('Logado com sucesso', 'Ok', { duration: 5000 })
         this.router.navigateByUrl('/clients')
       })
     )
     .subscribe({
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
-          this.snackbar.open(error.error.message, 'Ok', {
-            duration: 5000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-          })
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
-          this.snackbar.open('Ocorreu um erro ao entrar', 'Ok', {
-            duration: 5000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-          })
+          this.snackbar.open('Ocorreu um erro ao entrar', 'Ok', { duration: 5000 })
         }
       }
     })
