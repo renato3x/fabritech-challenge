@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Client } from 'src/app/globals/models/Client';
 import { ClientsService } from 'src/app/globals/services/clients.service';
 import { states } from 'src/app/globals/states';
 
@@ -12,6 +13,7 @@ import { states } from 'src/app/globals/states';
 export class ClientComponent implements OnInit {
 
   states = states
+  client!: Client
 
   clientForm: FormGroup = this.builder.group({
     firstName: ['', [ Validators.required ]],
@@ -45,6 +47,8 @@ export class ClientComponent implements OnInit {
     this.clientsService.getById(parseInt(id))
     .subscribe(
       client => {
+        this.client = client
+
         this.clientForm.setValue({
           firstName: client.firstName,
           lastName: client.lastName,
