@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { debounceTime, Subject } from 'rxjs';
 import { Client } from 'src/app/globals/models/Client';
 import { ClientsService } from 'src/app/globals/services/clients.service';
+import { ViaCepService } from 'src/app/globals/services/via-cep.service';
 
 @Component({
   selector: 'app-new-client',
@@ -121,7 +123,6 @@ export class NewClientComponent implements OnInit {
       initials: 'TO'
     }
   ]
-  // 62390-000
 
   clientForm: FormGroup = this.builder.group({
     firstName: ['', [ Validators.required ]],
@@ -145,13 +146,25 @@ export class NewClientComponent implements OnInit {
 
   kinships: FormArray = this.clientForm.get('kinships') as FormArray
 
+  cepEmitter$: Subject<string> = new Subject<string>()
+
   constructor(
     private builder: FormBuilder,
     private clientsService: ClientsService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private viaCepService: ViaCepService
   ) { }
 
   ngOnInit(): void {
+    this.cepEmitter$
+    .pipe(
+      debounceTime(2000)
+    )
+    .subscribe(
+      cep => {
+        this.getCepData(cep)
+      }
+    )
   }
 
   addKinship() {
@@ -172,6 +185,30 @@ export class NewClientComponent implements OnInit {
     .subscribe(
       client => {
         this.snackbar.open('Cliente salvo com sucesso', 'Ok', { duration: 5000 })
+      }
+    )
+  }
+
+  emitCep(cep: string) {
+    this.cepEmitter$.next(cep)
+  }
+
+  getCepData(cep: string) {
+    this.viaCepService
+    .getCep(cep)
+    .subscribe(
+      cep => {
+        const addressFields = this.clientForm.get('address') as FormGroup
+
+        addressFields.setValue({
+          ...addressFields.value,
+          cep: cep.cep,
+          name: cep.logradouro,
+          complement: cep.complemento,
+          state: cep.uf,
+          district: cep.bairro,
+          city: cep.localidade
+        })
       }
     )
   }

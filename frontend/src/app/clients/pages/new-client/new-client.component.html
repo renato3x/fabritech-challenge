@@ -44,7 +44,7 @@
           </div>
           <mat-form-field appearance="outline" id="signincep">
             <mat-label>CEP</mat-label>
-            <input type="text" matInput formControlName="cep" [value]="clientForm.value.address.cep | cep">
+            <input type="text" matInput formControlName="cep" [value]="clientForm.value.address.cep | cep" #cepInput (input)="emitCep(cepInput.value)">
           </mat-form-field>
           <mat-form-field appearance="outline" id="name">
             <mat-label>Endereço</mat-label>

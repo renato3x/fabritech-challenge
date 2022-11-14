@@ -5,4 +5,5 @@ export interface CepData {
   bairro: string
   uf: string
   ddd: string
+  localidade: string
 }
