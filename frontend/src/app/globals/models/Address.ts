@@ -7,7 +7,7 @@ export interface Address {
   district: string
   state: string
   complement: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 

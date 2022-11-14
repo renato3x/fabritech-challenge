@@ -12,6 +12,6 @@ export interface Client {
   email: string
   address: Address
   kinships: Kinship[]
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
