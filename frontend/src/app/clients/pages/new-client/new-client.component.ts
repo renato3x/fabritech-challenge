@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-client',
@@ -117,10 +118,41 @@ export class NewClientComponent implements OnInit {
       initials: 'TO'
     }
   ]
+  // 62390-000
 
-  constructor() { }
+  clientForm: FormGroup = this.builder.group({
+    firstName: ['', [ Validators.required ]],
+    lastName: ['', [ Validators.required ]],
+    birthDate: ['', [ Validators.required ]],
+    cpf: ['', [ Validators.required ]],
+    rg: ['', [ Validators.required ]],
+    telephone: ['', [ Validators.required ]],
+    email: ['', [ Validators.required, Validators.email ]],
+    address: this.builder.group({
+      city: ['', [ Validators.required ]],
+      name: ['', [ Validators.required ]],
+      cep: ['', [ Validators.required ]],
+      number: ['', [ Validators.required ]],
+      district: ['', [ Validators.required ]],
+      state: ['', [ Validators.required ]],
+      complement: ['', [ Validators.required ]]
+    }),
+    kinships: this.builder.array([])
+  })
+
+  kinships: FormArray = this.clientForm.get('kinships') as FormArray
+
+  constructor(
+    private builder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
   }
 
+  addKinship() {
+    this.kinships.push(this.builder.group({
+      name: [''],
+      kinship: ['']
+    }))
+  }
 }
