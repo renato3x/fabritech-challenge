@@ -31,7 +31,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" id="telephone">
           <mat-label>Telefone</mat-label>
-          <input type="tel" matInput formControlName="telephone">
+          <input type="tel" matInput formControlName="telephone" [value]="clientForm.value.telephone | telephone">
         </mat-form-field>
         <mat-form-field appearance="outline" id="email">
           <mat-label>E-mail</mat-label>

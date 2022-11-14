@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MaterialModule } from '../material/material.module';
 import { CpfPipe } from './pipes/cpf.pipe';
+import { TelephonePipe } from './pipes/telephone.pipe';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    CpfPipe
+    CpfPipe,
+    TelephonePipe
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { CpfPipe } from './pipes/cpf.pipe';
   ],
   exports: [
     NavbarComponent,
-    CpfPipe
+    CpfPipe,
+    TelephonePipe
   ]
 })
 export class GlobalsModule { }
