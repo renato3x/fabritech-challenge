@@ -14,7 +14,7 @@
 #client-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr) 50px;
   grid-template-areas:
     'fn ln'
     'cpf rg'
@@ -55,7 +55,7 @@
 #address-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr) 50px;
   grid-template-areas:
     'cep add'
     'num dis'
@@ -93,3 +93,9 @@
   grid-area: cmp;
 }
 
+.btn-save {
+  margin-bottom: 16px;
+  grid-column: 2/3;
+  width: 150px;
+  justify-self: flex-end;
+}
