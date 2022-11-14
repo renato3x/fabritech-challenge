@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Client } from 'src/app/globals/models/Client';
+import { ClientsService } from 'src/app/globals/services/clients.service';
 
 @Component({
   selector: 'app-new-client',
@@ -143,7 +146,9 @@ export class NewClientComponent implements OnInit {
   kinships: FormArray = this.clientForm.get('kinships') as FormArray
 
   constructor(
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private clientsService: ClientsService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -158,5 +163,20 @@ export class NewClientComponent implements OnInit {
 
   removeKinship(index: number) {
     this.kinships.removeAt(index)
+  }
+
+  save() {
+    const client = this.clientForm.value as Client
+
+    this.clientsService.create(client)
+    .subscribe(
+      client => {
+        this.snackbar.open('Cliente salvo com sucesso', 'Ok', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        })
+      }
+    )
   }
 }

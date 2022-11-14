@@ -4,7 +4,7 @@
       <mat-card-title>Novo Cliente</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form action="#" id="client-form" [formGroup]="clientForm">
+      <form action="#" id="client-form" [formGroup]="clientForm" (ngSubmit)="save()">
         <mat-form-field appearance="outline" id="first-name">
           <mat-label>Nome</mat-label>
           <input type="text" matInput formControlName="firstName">
@@ -95,7 +95,7 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-        <button mat-raised-button type="button" color="primary" id="save" [disabled]="clientForm.invalid">Salvar</button>
+        <button mat-raised-button type="submit" color="primary" id="save" [disabled]="clientForm.invalid">Salvar</button>
       </form>
     </mat-card-content>
   </mat-card>
