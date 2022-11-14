@@ -10,12 +10,14 @@ import { ClientsService } from 'src/app/globals/services/clients.service';
 export class ClientsListComponent implements OnInit {
 
   clients: Client[] = []
+  columns: string[] = ['id', 'name', 'birthDate', 'cpf', 'telephone', 'email', 'actions']
 
   constructor(
     private clientsService: ClientsService
   ) { }
 
   ngOnInit(): void {
+    this.getClients()
   }
 
   getClients() {
