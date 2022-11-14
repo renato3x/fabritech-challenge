@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MaterialModule } from '../material/material.module';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { TelephonePipe } from './pipes/telephone.pipe';
+import { CepPipe } from './pipes/cep.pipe';
 
 
 
@@ -11,7 +12,8 @@ import { TelephonePipe } from './pipes/telephone.pipe';
   declarations: [
     NavbarComponent,
     CpfPipe,
-    TelephonePipe
+    TelephonePipe,
+    CepPipe
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { TelephonePipe } from './pipes/telephone.pipe';
   exports: [
     NavbarComponent,
     CpfPipe,
-    TelephonePipe
+    TelephonePipe,
+    CepPipe
   ]
 })
 export class GlobalsModule { }
