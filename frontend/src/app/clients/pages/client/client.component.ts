@@ -48,33 +48,39 @@ export class ClientComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') as string
+    this.getUser(parseInt(id))
+  }
 
-    this.clientsService.getById(parseInt(id))
+  getUser(id: number) {
+    this.clientsService.getById(id)
     .subscribe(
       client => {
         this.client = client
-
-        this.clientForm.setValue({
-          firstName: client.firstName,
-          lastName: client.lastName,
-          birthDate: client.birthDate,
-          cpf: client.cpf,
-          rg: client.rg,
-          telephone: client.telephone,
-          email: client.email
-        })
-
-        this.addressForm.setValue({
-          city: client.address.city,
-          name: client.address.name,
-          cep: client.address.cep,
-          number: client.address.number,
-          district: client.address.district,
-          state: client.address.state,
-          complement: client.address.complement
-        })
+        this.loadClientDataInForms(client)
       }
     )
+  }
+
+  loadClientDataInForms(client: Client) {
+    this.clientForm.setValue({
+      firstName: client.firstName,
+      lastName: client.lastName,
+      birthDate: client.birthDate,
+      cpf: client.cpf,
+      rg: client.rg,
+      telephone: client.telephone,
+      email: client.email
+    })
+
+    this.addressForm.setValue({
+      city: client.address.city,
+      name: client.address.name,
+      cep: client.address.cep,
+      number: client.address.number,
+      district: client.address.district,
+      state: client.address.state,
+      complement: client.address.complement
+    })
   }
 
   saveClient() {
