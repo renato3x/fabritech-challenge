@@ -42,8 +42,12 @@ export class ClientsService {
     )
   }
 
-  delete(id: number) {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`)
+  }
+
+  update(client: Client): Observable<void> {
+    return this.http.put<void>(this.baseUrl, client)
   }
 
   private hasKinship(client: Client): boolean {

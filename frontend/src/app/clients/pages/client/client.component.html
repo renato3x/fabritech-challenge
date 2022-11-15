@@ -2,7 +2,7 @@
   <mat-card id="client-data">
     <mat-card-content>
       <h2>Dados Pessoais</h2>
-      <form action="#" [formGroup]="clientForm" id="client-form">
+      <form action="#" [formGroup]="clientForm" id="client-form" (ngSubmit)="saveClient()">
         <mat-form-field appearance="outline" id="first-name">
           <mat-label>Nome</mat-label>
           <input type="text" matInput formControlName="firstName">
@@ -34,7 +34,7 @@
           <mat-label>E-mail</mat-label>
           <input type="email" matInput formControlName="email">
         </mat-form-field>
-        <button mat-flat-button color="primary" class="btn-save">
+        <button mat-flat-button color="primary" class="btn-save" type="submit" [disabled]="clientForm.invalid">
           <mat-icon>save</mat-icon>
         </button>
       </form>

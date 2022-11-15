@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/globals/models/Client';
 import { ClientsService } from 'src/app/globals/services/clients.service';
@@ -38,7 +39,8 @@ export class ClientComponent implements OnInit {
   constructor(
     private clientsService: ClientsService,
     private route: ActivatedRoute,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,18 @@ export class ClientComponent implements OnInit {
           state: client.address.state,
           complement: client.address.complement
         })
+      }
+    )
+  }
+
+  saveClient() {
+    const client: Client = this.clientForm.value
+    client.id = this.client.id
+
+    this.clientsService.update(client)
+    .subscribe(
+      () => {
+        this.snackbar.open('Dados atualizados com sucesso!', 'Ok', { duration: 5000 })
       }
     )
   }
