@@ -167,13 +167,18 @@ export class ClientComponent implements OnInit {
     )
   }
 
-  saveKinships() {
-    const kinships: Kinship[] = this.kinships.value
+  saveKinships(ks: FormArray) {
+    const kinships: Kinship[] = ks.value
 
     this.kinshipsService.create(kinships)
     .pipe(
       mergeMap(kinships => {
-        this.client.kinships = kinships
+        const clientKinships = this.client.kinships
+
+        this.client.kinships = [
+          ...clientKinships,
+          ...kinships
+        ]
 
         return this.clientsService.update(this.client)
       })

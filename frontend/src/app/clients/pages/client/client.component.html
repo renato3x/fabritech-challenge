@@ -111,7 +111,7 @@
           </ng-container>
         </ng-container>
         <ng-container>
-          <form action="#" id="user-kinships-form" [formGroup]="userKinshipsForm">
+          <form action="#" id="user-kinships-form" [formGroup]="userKinshipsForm" (ngSubmit)="saveKinships(userKinships)">
             <div formArrayName="kinships">
               <div *ngFor="let kinship of userKinships.controls; let idx = index" [formGroupName]="idx" class="kinship-field">
                 <mat-form-field appearance="outline">
@@ -139,7 +139,7 @@
         </ng-container>
       </ng-container>
       <ng-template #kinshipForm>
-        <form action="#" id="add-kinships-form" [formGroup]="kinshipsForms" (ngSubmit)="saveKinships()">
+        <form action="#" id="add-kinships-form" [formGroup]="kinshipsForms" (ngSubmit)="saveKinships(kinships)">
           <ng-container formArrayName="kinships">
             <div *ngFor="let kinship of kinships.controls; let idx = index" [formGroupName]="idx" class="kinship-field">
               <mat-form-field appearance="outline">
