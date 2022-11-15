@@ -5,6 +5,7 @@
   box-sizing: border-box;
   padding: 16px;
   align-items: center;
+  position: relative;
 }
 
 #client-data {
@@ -98,4 +99,10 @@
   grid-column: 2/3;
   width: 150px;
   justify-self: flex-end;
+}
+
+#back {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
 }
