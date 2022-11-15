@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -81,6 +82,13 @@ export class NewClientComponent implements OnInit {
       client => {
         this.toggleSaving()
         this.snackbar.open('Cliente salvo com sucesso', 'Ok', { duration: 5000 })
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+        } else {
+          this.snackbar.open('Erro ao salvar cliente', 'Ok', { duration: 5000 })
+        }
       }
     )
   }
