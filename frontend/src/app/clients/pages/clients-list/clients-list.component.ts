@@ -14,7 +14,7 @@ import { ConfirmClientDeletionComponent } from '../../components/confirm-client-
 export class ClientsListComponent implements OnInit {
 
   clients: Client[] = []
-  columns: string[] = ['id', 'name', 'birthDate', 'cpf', 'telephone', 'email', 'actions']
+  columns: string[] = ['id', 'name', 'birthDate', 'cpf', 'telephone', 'email', 'address', 'city', 'state', 'cep', 'actions']
   deleting: boolean = false
   deletingId: number = -1
 
