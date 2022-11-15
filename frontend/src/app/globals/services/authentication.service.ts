@@ -31,7 +31,7 @@ export class AuthenticationService {
     const user = this.jwtHelper.decodeToken(token?.token)
     delete user.iat
     delete user.exp
-    return user as Partial<User>
+    return of(user as Partial<User>)
   }
 
   signup(user: User): Observable<User> {
