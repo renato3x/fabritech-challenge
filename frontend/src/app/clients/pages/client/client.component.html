@@ -1,7 +1,12 @@
 <div class="container">
   <mat-card id="client-data" *ngIf="client">
     <mat-card-content>
-      <h2>Dados Pessoais</h2>
+      <div class="header">
+        <h2>Dados Pessoais</h2>
+        <button mat-icon-button color="warn" matTooltip="Deletar cliente" matTooltipPosition="left" (click)="deleteClient()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
       <form action="#" [formGroup]="clientForm" id="client-form" (ngSubmit)="saveClient()">
         <mat-form-field appearance="outline" id="first-name">
           <mat-label>Nome</mat-label>
@@ -132,11 +137,6 @@
         </form>
       </ng-template>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button color="warn" matTooltip="Deletar cliente" matTooltipPosition="right" (click)="deleteClient()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
   </mat-card>
   <button mat-mini-fab color="accent" id="back" routerLink=".." matTooltip="Voltar" matTooltipPosition="left">
     <mat-icon>arrow_backward</mat-icon>
