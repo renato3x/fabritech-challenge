@@ -8,6 +8,9 @@ module.exports = {
     "@babel/preset-typescript"
   ],
   plugins: [
+    ['inline-dotenv', {
+      path: './.env'
+    }],
     ['module-resolver', {
       alias: {
         '@controllers': './src/controllers',
