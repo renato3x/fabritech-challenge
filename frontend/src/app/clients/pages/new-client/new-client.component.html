@@ -98,6 +98,9 @@
         <button mat-raised-button type="submit" color="primary" id="save" [disabled]="clientForm.invalid">Salvar</button>
       </form>
     </mat-card-content>
+    <mat-card-footer *ngIf="saving">
+      <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
   <button mat-mini-fab color="accent" routerLink=".." matTooltip="Voltar" matTooltipPosition="left" id="back">
     <mat-icon>arrow_backward</mat-icon>

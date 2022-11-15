@@ -40,6 +40,8 @@ export class NewClientComponent implements OnInit {
 
   cepEmitter$: Subject<string> = new Subject<string>()
 
+  saving: boolean = false
+
   constructor(
     private builder: FormBuilder,
     private clientsService: ClientsService,
@@ -71,11 +73,13 @@ export class NewClientComponent implements OnInit {
   }
 
   save() {
+    this.toggleSaving()
     const client = this.clientForm.value as Client
 
     this.clientsService.create(client)
     .subscribe(
       client => {
+        this.toggleSaving()
         this.snackbar.open('Cliente salvo com sucesso', 'Ok', { duration: 5000 })
       }
     )
@@ -103,5 +107,9 @@ export class NewClientComponent implements OnInit {
         })
       }
     )
+  }
+
+  private toggleSaving() {
+    this.saving = !this.saving
   }
 }
