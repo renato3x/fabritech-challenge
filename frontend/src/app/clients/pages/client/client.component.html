@@ -166,6 +166,9 @@
         </form>
       </ng-template>
     </mat-card-content>
+    <mat-card-footer *ngIf="saving">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
   <button mat-mini-fab color="accent" id="back" routerLink=".." matTooltip="Voltar" matTooltipPosition="left">
     <mat-icon>arrow_backward</mat-icon>

@@ -24,6 +24,7 @@ export class ClientComponent implements OnInit {
 
   states = states
   client!: Client
+  saving: boolean = false
 
   clientForm: FormGroup = this.builder.group({
     firstName: ['', [ Validators.required ]],
@@ -132,13 +133,16 @@ export class ClientComponent implements OnInit {
   saveClient() {
     const client: Client = this.clientForm.value
     client.id = this.client.id
+    this.toggleSaving()
 
     this.clientsService.update(client)
     .subscribe(
       () => {
+        this.toggleSaving()
         this.snackbar.open('Dados atualizados com sucesso!', 'Ok', { duration: 5000 })
       },
       error => {
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
@@ -149,15 +153,18 @@ export class ClientComponent implements OnInit {
   }
 
   saveAddress() {
+    this.toggleSaving()
     const address: Address = this.addressForm.value
     address.id = this.client.address.id
 
     this.addressService.update(address)
     .subscribe(
       () => {
+        this.toggleSaving()
         this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
       },
       error => {
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
@@ -169,6 +176,7 @@ export class ClientComponent implements OnInit {
 
   saveKinships(ks: FormArray) {
     const kinships: Kinship[] = ks.value
+    this.toggleSaving()
 
     this.kinshipsService.create(kinships)
     .pipe(
@@ -188,9 +196,11 @@ export class ClientComponent implements OnInit {
         this.snackbar.open('Parentescos salvos com sucesso!', 'Ok', { duration: 5000 })
         ks.clear()
         this.getUser(this.client.id as number)
+        this.toggleSaving()
       },
       error => {
         ks.clear()
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
@@ -201,14 +211,17 @@ export class ClientComponent implements OnInit {
   }
 
   saveKinship(kinship: Kinship, id: number) {
+    this.toggleSaving()
     kinship.id = id
 
     this.kinshipsService.update(kinship)
     .subscribe(
       () => {
+        this.toggleSaving()
         this.snackbar.open('Parentesco atualizado com sucesso!', 'Ok', { duration: 5000 })
       },
       error => {
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
@@ -219,6 +232,8 @@ export class ClientComponent implements OnInit {
   }
 
   deleteClient() {
+    this.toggleSaving()
+
     this.dialog.open(ConfirmClientDeletionComponent)
     .afterClosed()
     .subscribe(
@@ -228,8 +243,10 @@ export class ClientComponent implements OnInit {
           .subscribe(
             () => {
               this.router.navigateByUrl('/clients')
+              this.toggleSaving()
             },
             error => {
+              this.toggleSaving()
               if (error instanceof HttpErrorResponse) {
                 this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
               } else {
@@ -237,12 +254,16 @@ export class ClientComponent implements OnInit {
               }
             }
           )
+        } else {
+          this.toggleSaving()
         }
       }
     )
   }
 
   deleteKinship(id: number) {
+    this.toggleSaving()
+
     this.dialog.open(ConfirmKinshipDeletionComponent)
     .afterClosed()
     .subscribe(
@@ -253,8 +274,10 @@ export class ClientComponent implements OnInit {
             () => {
               this.snackbar.open('Parentesco deletado com sucesso!', 'Ok', { duration: 5000 })
               this.getUser(this.client.id as number)
+              this.toggleSaving()
             },
             error => {
+              this.toggleSaving()
               if (error instanceof HttpErrorResponse) {
                 this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
               } else {
@@ -262,8 +285,14 @@ export class ClientComponent implements OnInit {
               }
             }
           )
+        } else {
+          this.toggleSaving()
         }
       }
     )
+  }
+
+  private toggleSaving() {
+    this.saving = !this.saving
   }
 }
