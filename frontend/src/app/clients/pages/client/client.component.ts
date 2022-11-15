@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'src/app/globals/models/Address';
 import { Client } from 'src/app/globals/models/Client';
 import { AddressService } from 'src/app/globals/services/address.service';
 import { ClientsService } from 'src/app/globals/services/clients.service';
 import { states } from 'src/app/globals/states';
+import { ConfirmClientDeletionComponent } from '../../components/confirm-client-deletion/confirm-client-deletion.component';
 
 @Component({
   selector: 'app-client',
@@ -43,7 +45,9 @@ export class ClientComponent implements OnInit {
     private route: ActivatedRoute,
     private builder: FormBuilder,
     private snackbar: MatSnackBar,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -103,6 +107,23 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
+      }
+    )
+  }
+
+  deleteClient() {
+    this.dialog.open(ConfirmClientDeletionComponent)
+    .afterClosed()
+    .subscribe(
+      canDelete => {
+        if (canDelete) {
+          this.clientsService.delete(this.client.id as number)
+          .subscribe(
+            () => {
+              this.router.navigateByUrl('/clients')
+            }
+          )
+        }
       }
     )
   }

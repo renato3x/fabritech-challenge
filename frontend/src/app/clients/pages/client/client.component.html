@@ -76,6 +76,11 @@
         </button>
       </form>
     </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="warn" matTooltip="Deletar cliente" matTooltipPosition="right" (click)="deleteClient()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
   </mat-card>
   <button mat-mini-fab color="accent" id="back" routerLink=".." matTooltip="Voltar" matTooltipPosition="left">
     <mat-icon>arrow_backward</mat-icon>
