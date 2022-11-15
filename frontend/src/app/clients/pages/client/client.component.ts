@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mergeMap } from 'rxjs';
 import { Address } from 'src/app/globals/models/Address';
 import { Client } from 'src/app/globals/models/Client';
 import { Kinship } from 'src/app/globals/models/Kinship';
@@ -141,6 +142,25 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
+      }
+    )
+  }
+
+  saveKinships() {
+    const kinships: Kinship[] = this.kinships.value
+
+    this.kinshipsService.create(kinships)
+    .pipe(
+      mergeMap(kinships => {
+        this.client.kinships = kinships
+
+        return this.clientsService.update(this.client)
+      })
+    )
+    .subscribe(
+      () => {
+        this.snackbar.open('Parentescos salvos com sucesso!', 'Ok', { duration: 5000 })
+        this.getUser(this.client.id as number)
       }
     )
   }

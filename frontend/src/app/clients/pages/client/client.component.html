@@ -105,7 +105,7 @@
         </ng-container>
       </ng-container>
       <ng-template #kinshipForm>
-        <form action="#" id="new-kinships-forms" [formGroup]="kinshipsForms">
+        <form action="#" id="new-kinships-forms" [formGroup]="kinshipsForms" (ngSubmit)="saveKinships()">
           <ng-container formArrayName="kinships">
             <div *ngFor="let kinship of kinships.controls; let idx = index" [formGroupName]="idx" class="new-kinship-field">
               <mat-form-field appearance="outline">
@@ -122,7 +122,7 @@
             </div>
           </ng-container>
           <div class="new-kinships-forms-actions">
-            <button type="submit" mat-flat-button color="primary" *ngIf="kinships.length > 0" matTooltip="Salvar parentescos" matTooltipPosition="left">
+            <button type="submit" mat-flat-button color="primary" *ngIf="kinships.length > 0" matTooltip="Salvar parentescos" matTooltipPosition="left" [disabled]="kinships.invalid">
               <mat-icon>save</mat-icon>
             </button>
             <button mat-mini-fab color="accent" type="button" (click)="addKinship()" matTooltip="Adicionar parentesco" matTooltipPosition="right">
