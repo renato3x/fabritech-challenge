@@ -108,6 +108,19 @@ export class ClientComponent implements OnInit {
     })
   }
 
+  addKinship() {
+    const group = this.builder.group({
+      name: ['', [ Validators.required ]],
+      kinship: ['', [ Validators.required ]]
+    })
+
+    this.kinships.push(group)
+  }
+
+  removeKinship(index: number) {
+    this.kinships.removeAt(index)
+  }
+
   saveClient() {
     const client: Client = this.clientForm.value
     client.id = this.client.id

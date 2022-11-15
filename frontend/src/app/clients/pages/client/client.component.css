@@ -117,3 +117,22 @@
 .kinship-actions button + button {
   margin-left: 16px;
 }
+
+#new-kinships-forms {
+  padding: 16px 0;
+}
+
+.new-kinship-field {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5px;
+  align-items: center;
+}
+
+.new-kinships-forms-actions {
+  display: flex;
+}
+
+.new-kinships-forms-actions button + button {
+  margin-left: 16px;
+}
