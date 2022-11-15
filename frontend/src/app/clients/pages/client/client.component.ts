@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -130,6 +131,13 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Dados atualizados com sucesso!', 'Ok', { duration: 5000 })
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+        } else {
+          this.snackbar.open('Erro ao atualizar cliente', 'Ok', { duration: 5000 })
+        }
       }
     )
   }
@@ -142,6 +150,13 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+        } else {
+          this.snackbar.open('Erro ao atualizar endereço', 'Ok', { duration: 5000 })
+        }
       }
     )
   }
@@ -161,6 +176,13 @@ export class ClientComponent implements OnInit {
       () => {
         this.snackbar.open('Parentescos salvos com sucesso!', 'Ok', { duration: 5000 })
         this.getUser(this.client.id as number)
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+        } else {
+          this.snackbar.open('Erro ao salvar parentescos', 'Ok', { duration: 5000 })
+        }
       }
     )
   }
@@ -172,6 +194,13 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Parentesco atualizado com sucesso!', 'Ok', { duration: 5000 })
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+        } else {
+          this.snackbar.open('Erro ao atualizar parentesco', 'Ok', { duration: 5000 })
+        }
       }
     )
   }
@@ -186,6 +215,13 @@ export class ClientComponent implements OnInit {
           .subscribe(
             () => {
               this.router.navigateByUrl('/clients')
+            },
+            error => {
+              if (error instanceof HttpErrorResponse) {
+                this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+              } else {
+                this.snackbar.open('Erro ao deletar cliente', 'Ok', { duration: 5000 })
+              }
             }
           )
         }
@@ -204,6 +240,13 @@ export class ClientComponent implements OnInit {
             () => {
               this.snackbar.open('Parentesco deletado com sucesso!', 'Ok', { duration: 5000 })
               this.getUser(this.client.id as number)
+            },
+            error => {
+              if (error instanceof HttpErrorResponse) {
+                this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
+              } else {
+                this.snackbar.open('Erro ao deletar parentesco', 'Ok', { duration: 5000 })
+              }
             }
           )
         }
