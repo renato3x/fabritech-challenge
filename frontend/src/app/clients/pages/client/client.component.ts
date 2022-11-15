@@ -186,9 +186,11 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Parentescos salvos com sucesso!', 'Ok', { duration: 5000 })
+        ks.clear()
         this.getUser(this.client.id as number)
       },
       error => {
+        ks.clear()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
