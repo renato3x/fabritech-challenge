@@ -82,31 +82,33 @@
       </form>
       <mat-divider></mat-divider>
       <h2>Parentescos</h2>
-      <ng-container [formGroup]="kinshipsForms" *ngIf="client.kinships.length > 0; else kinshipForm">
-        <ng-container formArrayName="kinships">
-          <div
-            action="#"
-            *ngFor="let kinship of kinships.controls; let idx = index"
-            [formGroupName]="idx"
-            class="kinship-form"
-          >
-            <mat-form-field appearance="outline">
-              <mat-label>Nome</mat-label>
-              <input type="text" matInput formControlName="name">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Parentesco</mat-label>
-              <input type="text" matInput formControlName="kinship">
-            </mat-form-field>
-            <div class="kinship-actions">
-              <button mat-mini-fab color="primary" type="submit" [disabled]="kinship.invalid" (click)="saveKinship(kinship.value, $any(client.kinships[idx].id))">
-                <mat-icon>save</mat-icon>
-              </button>
-              <button mat-mini-fab color="warn" type="button" (click)="deleteKinship($any(client.kinships[idx].id))">
-                <mat-icon>delete</mat-icon>
-              </button>
+      <ng-container *ngIf="client.kinships.length > 0; else kinshipForm">
+        <ng-container [formGroup]="kinshipsForms">
+          <ng-container formArrayName="kinships">
+            <div
+              action="#"
+              *ngFor="let kinship of kinships.controls; let idx = index"
+              [formGroupName]="idx"
+              class="kinship-form"
+            >
+              <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input type="text" matInput formControlName="name">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Parentesco</mat-label>
+                <input type="text" matInput formControlName="kinship">
+              </mat-form-field>
+              <div class="kinship-actions">
+                <button mat-mini-fab color="primary" type="submit" [disabled]="kinship.invalid" (click)="saveKinship(kinship.value, $any(client.kinships[idx].id))">
+                  <mat-icon>save</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" type="button" (click)="deleteKinship($any(client.kinships[idx].id))">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </div>
-          </div>
+          </ng-container>
         </ng-container>
       </ng-container>
       <ng-template #kinshipForm>
