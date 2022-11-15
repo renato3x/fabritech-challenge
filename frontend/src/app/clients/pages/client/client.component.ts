@@ -51,6 +51,12 @@ export class ClientComponent implements OnInit {
 
   kinships: FormArray = this.kinshipsForms.get('kinships') as FormArray
 
+  userKinshipsForm: FormGroup = this.builder.group({
+    kinships: this.builder.array([])
+  })
+
+  userKinships: FormArray = this.userKinshipsForm.get('kinships') as FormArray
+
   constructor(
     private clientsService: ClientsService,
     private route: ActivatedRoute,

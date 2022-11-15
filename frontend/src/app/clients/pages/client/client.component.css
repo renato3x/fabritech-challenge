@@ -124,7 +124,8 @@
   margin-left: 16px;
 }
 
-#add-kinships-form {
+#add-kinships-form,
+#user-kinships-form {
   padding: 16px 0;
 }
 
@@ -135,10 +136,11 @@
   align-items: center;
 }
 
-.add-kinships-form-actions {
+.add-kinships-form-actions, .user-kinships-form-actions {
   display: flex;
 }
 
-.add-kinships-form-actions button + button {
+.add-kinships-form-actions button + button,
+.user-kinships-form-actions button + button {
   margin-left: 16px;
 }

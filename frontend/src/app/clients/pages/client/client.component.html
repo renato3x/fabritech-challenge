@@ -110,6 +110,33 @@
             </div>
           </ng-container>
         </ng-container>
+        <ng-container>
+          <form action="#" id="user-kinships-form" [formGroup]="userKinshipsForm">
+            <div formArrayName="kinships">
+              <div *ngFor="let kinship of userKinships.controls; let idx = index" [formGroupName]="idx">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nome</mat-label>
+                  <input type="text" matInput formControlName="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Parentesco</mat-label>
+                  <input type="text" matInput formControlName="kinship">
+                </mat-form-field>
+                <button mat-icon-button color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="user-kinships-form-actions">
+              <button type="submit" mat-flat-button color="primary" *ngIf="userKinships.length > 0" matTooltip="Salvar parentescos" matTooltipPosition="left" [disabled]="userKinships.invalid">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button mat-mini-fab color="accent" type="button" matTooltip="Adicionar parentesco" matTooltipPosition="right">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </form>
+        </ng-container>
       </ng-container>
       <ng-template #kinshipForm>
         <form action="#" id="add-kinships-form" [formGroup]="kinshipsForms" (ngSubmit)="saveKinships()">
