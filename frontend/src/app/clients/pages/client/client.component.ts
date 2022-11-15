@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Address } from 'src/app/globals/models/Address';
 import { Client } from 'src/app/globals/models/Client';
+import { AddressService } from 'src/app/globals/services/address.service';
 import { ClientsService } from 'src/app/globals/services/clients.service';
 import { states } from 'src/app/globals/states';
 
@@ -40,7 +42,8 @@ export class ClientComponent implements OnInit {
     private clientsService: ClientsService,
     private route: ActivatedRoute,
     private builder: FormBuilder,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private addressService: AddressService
   ) { }
 
   ngOnInit(): void {
@@ -82,6 +85,18 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Dados atualizados com sucesso!', 'Ok', { duration: 5000 })
+      }
+    )
+  }
+
+  saveAddress() {
+    const address: Address = this.addressForm.value
+    address.id = this.client.address.id
+
+    this.addressService.update(address)
+    .subscribe(
+      () => {
+        this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
       }
     )
   }

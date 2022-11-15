@@ -18,4 +18,8 @@ export class AddressService {
   create(address: Address): Observable<Address> {
     return this.http.post<Address>(this.baseUrl, address)
   }
+
+  update(address: Address): Observable<void> {
+    return this.http.put<void>(this.baseUrl, address)
+  }
 }
