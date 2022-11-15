@@ -23,6 +23,8 @@ export class SignupComponent implements OnInit {
     confirmPassword: ['', [ Validators.required, Validators.minLength(10) ]]
   })
 
+  saving: boolean = false
+
   passwordIsEquals: boolean = false
 
   constructor(
@@ -68,6 +70,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    this.toggleSaving()
     const user = this.buildUser()
 
     this.authService.signup(user)
@@ -77,11 +80,15 @@ export class SignupComponent implements OnInit {
         this.router.navigateByUrl('/authentication/signin')
       },
       error => {
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
           this.snackbar.open('Ocorreu algum erro ao cadastrar :(', 'Ok', { duration: 5000 })
         }
+      },
+      () =>{
+        this.toggleSaving()
       }
     )
   }
@@ -91,5 +98,9 @@ export class SignupComponent implements OnInit {
     delete user.confirmPassword
 
     return user as User
+  }
+
+  private toggleSaving() {
+    this.saving = !this.saving
   }
 }

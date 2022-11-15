@@ -37,5 +37,8 @@
         Já está cadastrado? <a routerLink="/signin">Entrar</a>
       </p>
     </mat-card-content>
+    <mat-card-footer *ngIf="saving">
+      <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
 </div>

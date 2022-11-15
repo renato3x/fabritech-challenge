@@ -20,6 +20,8 @@ export class SigninComponent implements OnInit {
     password: ['', [ Validators.required, Validators.minLength(10) ]]
   })
 
+  saving: boolean = false
+
   constructor(
     private builder: FormBuilder,
     private authService: AuthenticationService,
@@ -31,6 +33,7 @@ export class SigninComponent implements OnInit {
   }
 
   signin() {
+    this.toggleSaving()
     const user = this.buildUser()
     this.authService.signin(user)
     .pipe(
@@ -41,11 +44,15 @@ export class SigninComponent implements OnInit {
     )
     .subscribe({
       error: (error) => {
+        this.toggleSaving()
         if (error instanceof HttpErrorResponse) {
           this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
         } else {
           this.snackbar.open('Ocorreu um erro ao entrar', 'Ok', { duration: 5000 })
         }
+      },
+      complete: () => {
+        this.toggleSaving()
       }
     })
   }
@@ -63,5 +70,9 @@ export class SigninComponent implements OnInit {
     }
 
     return user
+  }
+
+  private toggleSaving() {
+    this.saving = !this.saving
   }
 }
