@@ -15,6 +15,8 @@ export class ClientsListComponent implements OnInit {
 
   clients: Client[] = []
   columns: string[] = ['id', 'name', 'birthDate', 'cpf', 'telephone', 'email', 'actions']
+  deleting: boolean = false
+  deletingId: number = -1
 
   constructor(
     private clientsService: ClientsService,
@@ -36,6 +38,9 @@ export class ClientsListComponent implements OnInit {
   }
 
   deleteClient(id: number) {
+    this.deletingId = id
+    this.toggleDeleting()
+
     this.dialog.open(ConfirmClientDeletionComponent)
     .afterClosed()
     .subscribe(
@@ -48,15 +53,25 @@ export class ClientsListComponent implements OnInit {
               this.getClients()
             },
             error => {
+              this.toggleDeleting()
               if (error instanceof HttpErrorResponse) {
                 this.snackbar.open(error.error.message, 'Ok', { duration: 5000 })
               } else {
                 this.snackbar.open('Erro ao deletar cliente', 'Ok', { duration: 5000 })
               }
+            },
+            () => {
+              this.toggleDeleting()
             }
           )
+        } else {
+          this.toggleDeleting()
         }
       }
     )
+  }
+
+  private toggleDeleting() {
+    this.deleting = !this.deleting
   }
 }

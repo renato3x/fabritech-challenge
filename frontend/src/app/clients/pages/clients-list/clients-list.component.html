@@ -44,9 +44,12 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let client">
-          <button mat-icon-button color="warn" matTooltip="Excluir cliente" (click)="deleteClient(client.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <mat-spinner mode="indeterminate" color="accent" diameter="20" *ngIf="deleting && deletingId === client.id; else icon"></mat-spinner>
+          <ng-template #icon>
+            <button mat-icon-button color="warn" matTooltip="Excluir cliente" (click)="deleteClient(client.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-template>
         </td>
       </ng-container>
 
