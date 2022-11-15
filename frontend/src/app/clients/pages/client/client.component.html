@@ -113,7 +113,7 @@
         <ng-container>
           <form action="#" id="user-kinships-form" [formGroup]="userKinshipsForm">
             <div formArrayName="kinships">
-              <div *ngFor="let kinship of userKinships.controls; let idx = index" [formGroupName]="idx">
+              <div *ngFor="let kinship of userKinships.controls; let idx = index" [formGroupName]="idx" class="kinship-field">
                 <mat-form-field appearance="outline">
                   <mat-label>Nome</mat-label>
                   <input type="text" matInput formControlName="name">
