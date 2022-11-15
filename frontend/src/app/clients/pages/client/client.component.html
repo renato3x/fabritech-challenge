@@ -75,6 +75,30 @@
           <mat-icon>save</mat-icon>
         </button>
       </form>
+      <mat-divider></mat-divider>
+      <h2>Parentescos</h2>
+      <ng-container [formGroup]="kinshipsForms">
+        <ng-container formArrayName="kinships">
+          <form action="#" *ngFor="let kinship of kinships.controls; let idx = index" [formGroupName]="idx" class="kinship-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input type="text" matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Parentesco</mat-label>
+              <input type="text" matInput formControlName="kinship">
+            </mat-form-field>
+            <div class="kinship-actions">
+              <button mat-mini-fab color="primary" type="submit">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" type="button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </form>
+        </ng-container>
+      </ng-container>
     </mat-card-content>
     <mat-card-actions>
       <button mat-flat-button color="warn" matTooltip="Deletar cliente" matTooltipPosition="right" (click)="deleteClient()">

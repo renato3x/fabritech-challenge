@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,6 +39,12 @@ export class ClientComponent implements OnInit {
     state: ['', [ Validators.required ]],
     complement: ['', [ Validators.required ]]
   })
+
+  kinshipsForms: FormGroup = this.builder.group({
+    kinships: this.builder.array([])
+  })
+
+  kinships: FormArray = this.kinshipsForms.get('kinships') as FormArray
 
   constructor(
     private clientsService: ClientsService,
@@ -84,6 +90,15 @@ export class ClientComponent implements OnInit {
       district: client.address.district,
       state: client.address.state,
       complement: client.address.complement
+    })
+
+    client.kinships.forEach(kinship => {
+      const group = this.builder.group({
+        name: [kinship.name, [ Validators.required ]],
+        kinship: [kinship.kinship, [ Validators.required ]]
+      })
+
+      this.kinships.push(group)
     })
   }
 

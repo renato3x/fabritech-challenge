@@ -106,3 +106,14 @@
   right: 32px;
   bottom: 32px;
 }
+
+.kinship-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5px;
+  align-items: center;
+}
+
+.kinship-actions button + button {
+  margin-left: 16px;
+}
