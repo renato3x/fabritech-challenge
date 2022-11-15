@@ -22,4 +22,8 @@ export class KinshipsService {
   update(kinship: Kinship): Observable<void> {
     return this.http.put<void>(this.baseUrl, kinship)
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
+  }
 }

@@ -95,6 +95,8 @@ export class ClientComponent implements OnInit {
       complement: client.address.complement
     })
 
+    this.kinships.clear()
+
     client.kinships.forEach(kinship => {
       const group = this.builder.group({
         name: [kinship.name, [ Validators.required ]],
@@ -153,6 +155,16 @@ export class ClientComponent implements OnInit {
             }
           )
         }
+      }
+    )
+  }
+
+  deleteKinship(id: number) {
+    this.kinshipsService.delete(id)
+    .subscribe(
+      () => {
+        this.snackbar.open('Parentesco deletado com sucesso!', 'Ok', { duration: 5000 })
+        this.getUser(this.client.id as number)
       }
     )
   }

@@ -97,7 +97,7 @@
               <button mat-mini-fab color="primary" type="submit" [disabled]="kinship.invalid" (click)="saveKinship(kinship.value, $any(client.kinships[idx].id))">
                 <mat-icon>save</mat-icon>
               </button>
-              <button mat-mini-fab color="warn" type="button">
+              <button mat-mini-fab color="warn" type="button" (click)="deleteKinship($any(client.kinships[idx].id))">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
