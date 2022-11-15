@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClientComponent } from './pages/client/client.component';
 import { GlobalsModule } from '../globals/globals.module';
 import { ConfirmClientDeletionComponent } from './components/confirm-client-deletion/confirm-client-deletion.component';
+import { ConfirmKinshipDeletionComponent } from './components/confirm-kinship-deletion/confirm-kinship-deletion.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ConfirmClientDeletionComponent } from './components/confirm-client-dele
     ClientsListComponent,
     NewClientComponent,
     ClientComponent,
-    ConfirmClientDeletionComponent
+    ConfirmClientDeletionComponent,
+    ConfirmKinshipDeletionComponent
   ],
   imports: [
     CommonModule,

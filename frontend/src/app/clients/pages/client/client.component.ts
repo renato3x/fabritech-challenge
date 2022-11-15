@@ -11,6 +11,7 @@ import { ClientsService } from 'src/app/globals/services/clients.service';
 import { KinshipsService } from 'src/app/globals/services/kinships.service';
 import { states } from 'src/app/globals/states';
 import { ConfirmClientDeletionComponent } from '../../components/confirm-client-deletion/confirm-client-deletion.component';
+import { ConfirmKinshipDeletionComponent } from '../../components/confirm-kinship-deletion/confirm-kinship-deletion.component';
 
 @Component({
   selector: 'app-client',
@@ -160,11 +161,19 @@ export class ClientComponent implements OnInit {
   }
 
   deleteKinship(id: number) {
-    this.kinshipsService.delete(id)
+    this.dialog.open(ConfirmKinshipDeletionComponent)
+    .afterClosed()
     .subscribe(
-      () => {
-        this.snackbar.open('Parentesco deletado com sucesso!', 'Ok', { duration: 5000 })
-        this.getUser(this.client.id as number)
+      canDelete => {
+        if (canDelete) {
+          this.kinshipsService.delete(id)
+          .subscribe(
+            () => {
+              this.snackbar.open('Parentesco deletado com sucesso!', 'Ok', { duration: 5000 })
+              this.getUser(this.client.id as number)
+            }
+          )
+        }
       }
     )
   }
