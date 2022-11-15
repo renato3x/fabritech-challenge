@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" id="cpf">
           <mat-label>CPF</mat-label>
-          <input type="text" matInput formControlName="cpf">
+          <input type="text" matInput formControlName="cpf" [value]="clientForm.value.cpf | cpf">
         </mat-form-field>
         <mat-form-field appearance="outline" id="rg">
           <mat-label>RG</mat-label>
@@ -33,7 +33,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" id="telephone">
           <mat-label>Telefone</mat-label>
-          <input type="tel" matInput formControlName="telephone" [value]="clientForm.value.telephone">
+          <input type="tel" matInput formControlName="telephone" [value]="clientForm.value.telephone | telephone">
         </mat-form-field>
         <mat-form-field appearance="outline" id="email">
           <mat-label>E-mail</mat-label>
@@ -48,7 +48,7 @@
       <form action="#" [formGroup]="addressForm" id="address-form" (ngSubmit)="saveAddress()">
         <mat-form-field appearance="outline" id="cep">
           <mat-label>CEP</mat-label>
-          <input type="text" matInput formControlName="cep" #cepInput (input)="emitCep(cepInput.value)">
+          <input type="text" matInput formControlName="cep" #cepInput (input)="emitCep(cepInput.value)" [value]="addressForm.value.cep | cep">
         </mat-form-field>
         <mat-form-field appearance="outline" id="name">
           <mat-label>Endereço</mat-label>
