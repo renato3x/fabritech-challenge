@@ -4,13 +4,14 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap } from 'rxjs';
+import { debounceTime, mergeMap, Subject } from 'rxjs';
 import { Address } from 'src/app/globals/models/Address';
 import { Client } from 'src/app/globals/models/Client';
 import { Kinship } from 'src/app/globals/models/Kinship';
 import { AddressService } from 'src/app/globals/services/address.service';
 import { ClientsService } from 'src/app/globals/services/clients.service';
 import { KinshipsService } from 'src/app/globals/services/kinships.service';
+import { ViaCepService } from 'src/app/globals/services/via-cep.service';
 import { states } from 'src/app/globals/states';
 import { ConfirmClientDeletionComponent } from '../../components/confirm-client-deletion/confirm-client-deletion.component';
 import { ConfirmKinshipDeletionComponent } from '../../components/confirm-kinship-deletion/confirm-kinship-deletion.component';
@@ -58,6 +59,8 @@ export class ClientComponent implements OnInit {
 
   userKinships: FormArray = this.userKinshipsForm.get('kinships') as FormArray
 
+  cepEmitter$: Subject<string> = new Subject<string>()
+
   constructor(
     private clientsService: ClientsService,
     private route: ActivatedRoute,
@@ -66,12 +69,46 @@ export class ClientComponent implements OnInit {
     private addressService: AddressService,
     private dialog: MatDialog,
     private router: Router,
-    private kinshipsService: KinshipsService
+    private kinshipsService: KinshipsService,
+    private viaCepService: ViaCepService
   ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') as string
     this.getUser(parseInt(id))
+
+    this.cepEmitter$
+    .pipe(
+      debounceTime(2000)
+    )
+    .subscribe(
+      cep => {
+        this.getCepData(cep)
+      }
+    )
+  }
+
+  emitCep(cep: string) {
+    this.cepEmitter$.next(cep)
+  }
+
+  getCepData(cep: string) {
+    this.viaCepService.getCep(cep)
+    .subscribe(
+      cep => {
+        const addressData = this.addressForm.value
+
+        this.addressForm.setValue({
+          ...addressData,
+          cep: cep.cep,
+          name: cep.logradouro,
+          complement: cep.complemento,
+          state: cep.uf,
+          district: cep.bairro,
+          city: cep.localidade
+        })
+      }
+    )
   }
 
   getUser(id: number) {

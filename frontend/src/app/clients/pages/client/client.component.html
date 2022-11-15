@@ -48,7 +48,7 @@
       <form action="#" [formGroup]="addressForm" id="address-form" (ngSubmit)="saveAddress()">
         <mat-form-field appearance="outline" id="cep">
           <mat-label>CEP</mat-label>
-          <input type="text" matInput formControlName="cep">
+          <input type="text" matInput formControlName="cep" #cepInput (input)="emitCep(cepInput.value)">
         </mat-form-field>
         <mat-form-field appearance="outline" id="name">
           <mat-label>Endereço</mat-label>
