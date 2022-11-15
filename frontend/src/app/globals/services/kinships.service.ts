@@ -18,4 +18,8 @@ export class KinshipsService {
   create(kinships: Kinship[]): Observable<Kinship[]> {
     return this.http.post<Kinship[]>(this.baseUrl, kinships)
   }
+
+  update(kinship: Kinship): Observable<void> {
+    return this.http.put<void>(this.baseUrl, kinship)
+  }
 }

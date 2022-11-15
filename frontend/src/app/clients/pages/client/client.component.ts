@@ -5,8 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'src/app/globals/models/Address';
 import { Client } from 'src/app/globals/models/Client';
+import { Kinship } from 'src/app/globals/models/Kinship';
 import { AddressService } from 'src/app/globals/services/address.service';
 import { ClientsService } from 'src/app/globals/services/clients.service';
+import { KinshipsService } from 'src/app/globals/services/kinships.service';
 import { states } from 'src/app/globals/states';
 import { ConfirmClientDeletionComponent } from '../../components/confirm-client-deletion/confirm-client-deletion.component';
 
@@ -53,7 +55,8 @@ export class ClientComponent implements OnInit {
     private snackbar: MatSnackBar,
     private addressService: AddressService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private kinshipsService: KinshipsService
   ) { }
 
   ngOnInit(): void {
@@ -122,6 +125,17 @@ export class ClientComponent implements OnInit {
     .subscribe(
       () => {
         this.snackbar.open('Endereço atualizado com sucesso!', 'Ok', { duration: 5000 })
+      }
+    )
+  }
+
+  saveKinship(kinship: Kinship, id: number) {
+    kinship.id = id
+
+    this.kinshipsService.update(kinship)
+    .subscribe(
+      () => {
+        this.snackbar.open('Parentesco atualizado com sucesso!', 'Ok', { duration: 5000 })
       }
     )
   }

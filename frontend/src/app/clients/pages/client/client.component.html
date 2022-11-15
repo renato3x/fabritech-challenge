@@ -79,7 +79,12 @@
       <h2>Parentescos</h2>
       <ng-container [formGroup]="kinshipsForms">
         <ng-container formArrayName="kinships">
-          <form action="#" *ngFor="let kinship of kinships.controls; let idx = index" [formGroupName]="idx" class="kinship-form">
+          <div
+            action="#"
+            *ngFor="let kinship of kinships.controls; let idx = index"
+            [formGroupName]="idx"
+            class="kinship-form"
+          >
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
               <input type="text" matInput formControlName="name">
@@ -89,14 +94,14 @@
               <input type="text" matInput formControlName="kinship">
             </mat-form-field>
             <div class="kinship-actions">
-              <button mat-mini-fab color="primary" type="submit">
+              <button mat-mini-fab color="primary" type="submit" [disabled]="kinship.invalid" (click)="saveKinship(kinship.value, $any(client.kinships[idx].id))">
                 <mat-icon>save</mat-icon>
               </button>
               <button mat-mini-fab color="warn" type="button">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-          </form>
+          </div>
         </ng-container>
       </ng-container>
     </mat-card-content>
