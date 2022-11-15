@@ -125,8 +125,8 @@ export class ClientComponent implements OnInit {
     kinships.push(group)
   }
 
-  removeKinship(index: number) {
-    this.kinships.removeAt(index)
+  removeKinship(kinships: FormArray, index: number) {
+    kinships.removeAt(index)
   }
 
   saveClient() {
