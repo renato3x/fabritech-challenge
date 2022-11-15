@@ -116,13 +116,13 @@ export class ClientComponent implements OnInit {
     })
   }
 
-  addKinship() {
+  addKinship(kinships: FormArray) {
     const group = this.builder.group({
       name: ['', [ Validators.required ]],
       kinship: ['', [ Validators.required ]]
     })
 
-    this.kinships.push(group)
+    kinships.push(group)
   }
 
   removeKinship(index: number) {
